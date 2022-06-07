@@ -11,7 +11,8 @@ class AlertDialogCustom extends BaseDialog {
   final Function()? onTap;
 
   AlertDialogCustom(
-      {this.description,
+      {Key? key,
+      this.description,
       Widget? bodyWidget,
       Widget? titleWidget,
       required BuildContext context,
@@ -21,6 +22,7 @@ class AlertDialogCustom extends BaseDialog {
       double width = 533})
       : assert(bodyWidget == null || description == null),
         super(
+          key: key,
           context: context,
           width: width,
           titleWidget: Text(

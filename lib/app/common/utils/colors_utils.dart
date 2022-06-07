@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorUtils {
   /// Common Colors
-  static const Color primaryColor = Color(0xffEB5A6D);
+  static const Color primaryColor = Color(0xffCE7A58);
   static const Color primaryColor2 = Color(0xffE94057);
   static const Color lightPrimaryColor = Color(0xfff57674);
   // static const Color logoThirdColor = Color.fromRGBO(233, 64, 87, 1);
@@ -12,7 +12,7 @@ class ColorUtils {
   static const Color fourthColor = Color(0xFFe3f2fd);
   static const Color backgroundColor = paleGrey;
   static const Color paleGrey = Color(0xffF5F5F5);
-  static const Color primaryTextColor = Color(0xff000000);
+  static const Color primaryTextColor = Color(0xffCE7A58);
 
   static const Color activeColor = Color(0xff4CAF50);
   static const Color accentColor = Color(0xff80D321);
@@ -22,6 +22,7 @@ class ColorUtils {
   static const Color greyColor = Color(0xffe8e8e8);
   static const Color greyBackGroundColor = Color(0xffF5F5F5);
   static const Color darkGreyColor = Color(0xff797979);
+  static const Color hintTextColor = Color(0xff828282);
   static const Color lightGreyColor = Color(0x00000033);
   static const Color dividerColor = Color(0xFFE0E0E0);
   static const Color whiteColor = Color(0xFFFFFFFF);
@@ -38,6 +39,7 @@ class ColorUtils {
   static const Color memoDividerColor = Color(0xffEBEBEB);
   static const Color facebookColor = Color(0xff3b5998);
   static const Color premiumColor = Color.fromRGBO(227, 164, 65, 1);
+  static const Color borderColor = Color(0xffC9CDCF);
 }
 
 class OpacityUtils {

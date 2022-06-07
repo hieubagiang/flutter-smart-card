@@ -11,11 +11,12 @@ class SmartCardCommand {
 
 class SmartCardHelper {
   CardStruct? card;
+  int? ctx;
 
   Future<void> getCardSerialNumber() async {
-    int ctx = await Pcsc.establishContext(PcscSCope.user);
+    ctx = await Pcsc.establishContext(PcscSCope.user);
     try {
-      List<String> readers = await Pcsc.listReaders(ctx);
+      List<String> readers = await Pcsc.listReaders(ctx!);
 
       if (readers.isEmpty) {
         injector.get<LogUtils>().logD('Could not detect any reader');
@@ -24,7 +25,7 @@ class SmartCardHelper {
         injector.get<LogUtils>().logI('Using reader: $reader');
 
         card = await Pcsc.cardConnect(
-            ctx, reader, PcscShare.shared, PcscProtocol.any);
+            ctx!, reader, PcscShare.shared, PcscProtocol.any);
         var response = await Pcsc.transmit(card!, SmartCardCommand.connect());
         var sw = response.sublist(response.length - 2);
         var sn = response.sublist(0, response.length - 2);
@@ -34,27 +35,26 @@ class SmartCardHelper {
               .get<LogUtils>()
               .logE('Card returned an error: ${hexDump(sw)}');
         } else {
-          injector
-              .get<LogUtils>()
-              .logI('Card Serial Number is: ${hexDump(sn)}');
-          injector.get<LogUtils>().logI('Done');
+          injector.get<LogUtils>().logI('Connected');
         }
       }
     } catch (e) {
       injector.get<LogUtils>().logE('Card returned an error: $e');
-    } finally {
-      if (card != null) {
-        try {
-          await Pcsc.cardDisconnect(card!.hCard, PcscDisposition.resetCard);
-        } on Exception catch (e) {
-          injector.get<LogUtils>().logE(e.toString());
-        }
-      }
+    }
+  }
+
+  Future<void> disconnect() async {
+    if (card != null) {
       try {
-        await Pcsc.releaseContext(ctx);
+        await Pcsc.cardDisconnect(card!.hCard, PcscDisposition.resetCard);
       } on Exception catch (e) {
-        injector.get<LogUtils>().logI(e.toString());
+        injector.get<LogUtils>().logE(e.toString());
       }
+    }
+    try {
+      await Pcsc.releaseContext(ctx!);
+    } on Exception catch (e) {
+      injector.get<LogUtils>().logI(e.toString());
     }
   }
 

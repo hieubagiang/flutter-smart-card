@@ -1,20 +1,15 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+
 import '../../../common/base/base_controller.dart';
 
 class LoginController extends BaseController {
-  static final LoginController _singleton = LoginController._internal();
-
-  factory LoginController() {
-    return _singleton;
-  }
-
-  LoginController._internal();
-
   var selectedIndex = 0.obs;
   RxInt chatTotalUnreadCount = 0.obs;
   List<BaseController> controllerList = [];
   RxBool isInitDone = false.obs;
+  TextEditingController pinTextCtrl = TextEditingController();
 
   int lastTap = DateTime.now().millisecondsSinceEpoch;
   int consecutiveTaps = 1;
@@ -51,5 +46,10 @@ class LoginController extends BaseController {
   @override
   Future<void> onClose() async {
     super.onClose();
+  }
+
+  void onSubmitLogin() {
+    print(pinTextCtrl.text);
+    ;
   }
 }

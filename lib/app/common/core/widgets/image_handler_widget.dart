@@ -6,7 +6,8 @@ import 'index.dart';
 class ImageHandlerWidget extends StatelessWidget {
   final String urlToImage;
 
-  const ImageHandlerWidget({required this.urlToImage});
+  const ImageHandlerWidget({Key? key, required this.urlToImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -20,4 +20,5 @@ abstract class RouteList {
   static const payment = '/payment';
   static const premiumInit = '/premium';
   static const admin = '/admin';
+  static const connectCard = '/connect_card';
 }

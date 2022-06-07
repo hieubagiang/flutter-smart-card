@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'app/common/utils/utils.dart';
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
+        designSize: const Size(1536, 824),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (contex, child) {
@@ -19,14 +20,20 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             getPages: AppPages.pages,
             translations: MyTranslations(),
-            locale: MyTranslations.locale,
+            locale: MyTranslations.fallbackLocale,
             fallbackLocale: MyTranslations.fallbackLocale,
             theme: ThemeData(
-              primarySwatch: Colors.pink,
+              primarySwatch: Colors.blue,
+              textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
             ),
-            localizationsDelegates: const [],
             supportedLocales: MyTranslations.locales,
-            initialRoute: RouteList.signIn,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              // DefaultCupertinoLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate, // Here !
+              DefaultWidgetsLocalizations.delegate,
+            ],
+            initialRoute: RouteList.connectCard,
 
             /*
               FirebaseAuth.instance.currentUser == null

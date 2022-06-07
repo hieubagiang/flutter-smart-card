@@ -11,7 +11,8 @@ class PhotoViewPage extends StatefulWidget {
   final List<String>? imageUrls;
   final int currentIndex;
 
-  const PhotoViewPage(this.imageUrls, this.currentIndex);
+  const PhotoViewPage(this.imageUrls, this.currentIndex, {Key? key})
+      : super(key: key);
 
   @override
   _PhotoViewPageState createState() => _PhotoViewPageState();
