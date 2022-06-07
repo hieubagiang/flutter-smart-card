@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
 import '../../../common/helper/smart_card_helper.dart';
 import '../../../routes/app_pages.dart';
+import '../../../widgets/dialogs_widget/custom_alert_dialog_widget.dart';
+import '../../../widgets/dialogs_widget/error_dialog.dart';
 
 class CardConnectController extends BaseController {
   RxBool isInitDone = false.obs;
@@ -37,6 +40,12 @@ class CardConnectController extends BaseController {
     final success = await injector.get<SmartCardHelper>().getCardSerialNumber();
     if (success) {
       Get.toNamed(RouteList.signIn);
+    } else {
+      SmartDialog.show(builder: (context) {
+        return ErrorDialog(
+          errorMessage: 'connect_card_failed_message'.tr,
+        );
+      });
     }
   }
 

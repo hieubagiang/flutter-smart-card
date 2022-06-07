@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'app/common/utils/utils.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
             getPages: AppPages.pages,
             translations: MyTranslations(),
             locale: MyTranslations.fallbackLocale,
+            navigatorObservers: [FlutterSmartDialog.observer],
             fallbackLocale: MyTranslations.fallbackLocale,
             theme: ThemeData(
               primarySwatch: Colors.blue,
@@ -39,9 +41,9 @@ class MyApp extends StatelessWidget {
               FirebaseAuth.instance.currentUser == null
                   ? RouteList.welcome
                   : RouteList.signUp*/
-            builder: (context, child) {
+            builder: FlutterSmartDialog.init(builder: (context, child) {
               return child!;
-            },
+            }),
           );
         });
   }

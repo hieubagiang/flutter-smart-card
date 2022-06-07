@@ -25,13 +25,16 @@ class SmartCardHelper {
         String reader = readers[0];
         injector.get<LogUtils>().logI('Using reader: $reader');
 
-        card = await Pcsc.cardConnect(ctx!, reader, PcscShare.shared, PcscProtocol.any);
+        card = await Pcsc.cardConnect(
+            ctx!, reader, PcscShare.shared, PcscProtocol.any);
         var response = await Pcsc.transmit(card!, SmartCardCommand.connect());
         var sw = response.sublist(response.length - 2);
         var sn = response.sublist(0, response.length - 2);
 
         if (sw[0] != 0x90 || sw[1] != 0x00) {
-          injector.get<LogUtils>().logE('Card returned an error: ${hexDump(sw)}');
+          injector
+              .get<LogUtils>()
+              .logE('Card returned an error: ${hexDump(sw)}');
         } else {
           injector.get<LogUtils>().logI('Connected');
           isSuccess = true;
@@ -59,6 +62,8 @@ class SmartCardHelper {
   }
 
   static String hexDump(List<int> csn) {
-    return csn.map((i) => i.toRadixString(16).padLeft(2, '0').toUpperCase()).join(' ');
+    return csn
+        .map((i) => i.toRadixString(16).padLeft(2, '0').toUpperCase())
+        .join(' ');
   }
 }
