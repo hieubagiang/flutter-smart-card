@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 
+import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
+import '../../../common/helper/smart_card_helper.dart';
+import '../../../routes/app_pages.dart';
 
 class CardConnectController extends BaseController {
   RxBool isInitDone = false.obs;
@@ -30,6 +33,12 @@ class CardConnectController extends BaseController {
     super.onClose();
   }
 
-  void onSubmitCardConnect() {}
+  Future<void> onSubmitCardConnect() async {
+    final success = await injector.get<SmartCardHelper>().getCardSerialNumber();
+    if (success) {
+      Get.toNamed(RouteList.signIn);
+    }
+  }
+
   void onSubmitCardCo51nnect() {}
 }

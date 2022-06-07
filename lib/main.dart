@@ -8,6 +8,5 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await initInjector();
-  await injector.get<SmartCardHelper>().getCardSerialNumber();
   runApp(const MyApp());
 }
