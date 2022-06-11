@@ -1,10 +1,11 @@
-import 'package:smart_card/app/common/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_card/app/common/utils/utils.dart';
 
 class ImageViewerDialog extends StatefulWidget {
   final List<Image> images;
   final int selectedIndex;
+
   const ImageViewerDialog({
     required this.images,
     this.selectedIndex = 0,
@@ -18,6 +19,7 @@ class ImageViewerDialog extends StatefulWidget {
 
 class _ImageViewerDialogState extends State<ImageViewerDialog> {
   int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();

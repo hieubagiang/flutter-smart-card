@@ -1,6 +1,7 @@
 import 'dart:ui';
 
-import 'package:smart_card/app/common/utils/utils.dart';import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_card/app/common/utils/utils.dart';
 
 class ImageOverlayFilter extends StatelessWidget {
   const ImageOverlayFilter({

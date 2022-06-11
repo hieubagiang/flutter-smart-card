@@ -1,5 +1,6 @@
 class DefaultConfig {
   static const splashScreenSecondTimeOut = 2;
+
   // static const environmentCollection = 'environments';
   // static const environment = 'development';
   static const environment = 'release';

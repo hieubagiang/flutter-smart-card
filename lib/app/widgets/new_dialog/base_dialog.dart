@@ -1,5 +1,6 @@
-import '../../common/utils/utils.dart';
 import 'package:flutter/material.dart';
+
+import '../../common/utils/utils.dart';
 
 class Consts {
   Consts._();
@@ -32,13 +33,14 @@ class BaseDialog extends StatelessWidget {
   final double? width;
 
   const BaseDialog({
+    Key? key,
     required this.titleWidget,
     this.showLoad,
     required this.actions,
     required this.bodyWidget,
     required this.context,
     this.width = 533,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

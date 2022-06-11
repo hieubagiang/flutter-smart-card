@@ -33,6 +33,8 @@ class MyTranslations extends Translations {
   //function change language if u don't care language setting system
   static void changeLocale(String langCode) {
     final locale = _getLocaleFromLanguage(langCode: langCode);
+    // const locale = const Locale('vi', 'VN');
+
     Get.updateLocale(locale);
   }
 

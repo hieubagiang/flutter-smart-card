@@ -1,5 +1,5 @@
-import 'package:smart_card/app/common/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_card/app/common/utils/utils.dart';
 
 import '../custom_button.dart';
 
@@ -39,6 +39,7 @@ class CustomDialog extends StatelessWidget {
   final double width;
 
   const CustomDialog({
+    Key? key,
     this.title = 'Thông báo',
     this.description = '',
     required this.onAccept,
@@ -46,7 +47,7 @@ class CustomDialog extends StatelessWidget {
     this.onCancel,
     this.cancelText = 'HỦY',
     this.width = 533.0,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

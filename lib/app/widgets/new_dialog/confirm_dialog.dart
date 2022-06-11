@@ -12,7 +12,8 @@ class ConfirmDialog extends BaseDialog {
   final bool isAllowSubmit;
 
   ConfirmDialog(
-      {this.description,
+      {Key? key,
+      this.description,
       Widget? bodyWidget,
       Widget? titleWidget,
       required BuildContext context,
@@ -23,6 +24,7 @@ class ConfirmDialog extends BaseDialog {
       double? width = 533})
       : assert(bodyWidget == null || description == null),
         super(
+          key: key,
           context: context,
           width: width,
           titleWidget: Text(

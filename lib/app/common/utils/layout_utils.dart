@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpaceUtils {
   static const double spaceZero = 0.0;
-  static final double spaceSmaller = 4.w;
-  static final double spaceSmall = 8.w;
+  static final double spaceSmaller = 8.w;
+  static final double spaceSmall = 12.w;
 
   static final double spaceMedium = 16.w;
   static final double spaceMediumLarge = 24.w;

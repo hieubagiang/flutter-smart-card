@@ -1,5 +1,5 @@
-import 'package:smart_card/app/common/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_card/app/common/utils/utils.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String? label;

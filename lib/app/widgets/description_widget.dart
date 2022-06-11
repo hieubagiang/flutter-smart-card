@@ -10,7 +10,7 @@ class _Const {
 class DescriptionTextWidget extends StatefulWidget {
   final String text;
 
-  const DescriptionTextWidget({required this.text});
+  const DescriptionTextWidget({Key? key, required this.text}) : super(key: key);
 
   @override
   _DescriptionTextWidgetState createState() => _DescriptionTextWidgetState();
