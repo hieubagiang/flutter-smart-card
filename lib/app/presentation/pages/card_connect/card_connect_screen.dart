@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_card/app/common/utils/styles.dart';
 import 'package:smart_card/app/common/utils/utils.dart';
 
 import '../../../common/base/base_view_view_model.dart';
 import '../../../widgets/custom_button.dart';
-import '../../../widgets/custom_text_field.dart';
 import 'card_connect_controller.dart';
 
 class CardConnectScreen extends BaseView<CardConnectController> {

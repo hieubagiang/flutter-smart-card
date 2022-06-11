@@ -6,6 +6,7 @@ class FirebaseStorageConstants {
   static const String admin = 'admin';
   static const int limitRequest = 20;
   static const int limitBoostProfileInMinute = 15;
+
   // static const environmentCollection = 'environments';
   // static const environment = 'development';
   static const environment = 'development';

@@ -1,11 +1,12 @@
-import 'package:smart_card/app/common/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:smart_card/app/common/utils/utils.dart';
 
 class EmptyDataWidget extends StatelessWidget {
   final String? message;
 
   const EmptyDataWidget({Key? key, this.message}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(

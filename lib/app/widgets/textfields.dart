@@ -53,8 +53,9 @@ class TextFieldsState extends State<TextFields> {
         hintStyle: widget.isSignupfield!
             ? TextStyle(fontSize: 17, color: Colors.white.withOpacity(0.5))
             : null,
-        errorStyle:
-            widget.isSignupfield! ? const TextStyle(color: Colors.yellow) : null,
+        errorStyle: widget.isSignupfield!
+            ? const TextStyle(color: Colors.yellow)
+            : null,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
           borderSide: BorderSide(

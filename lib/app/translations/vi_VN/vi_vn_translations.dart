@@ -5,4 +5,5 @@ final Map<String, String> viVn = {
   'register': 'Đăng ký',
   'card_connect': 'Kết nối đến thẻ',
   'card_disconnect': 'Ngắt kết nối đến thẻ',
+  'connect_card_failed_message': 'Kết nối thất bại'
 };

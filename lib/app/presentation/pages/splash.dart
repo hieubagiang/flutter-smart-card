@@ -4,6 +4,7 @@ import '../constants.dart';
 
 class Splash extends StatelessWidget {
   const Splash({required Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

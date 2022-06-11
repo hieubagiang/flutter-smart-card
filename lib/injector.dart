@@ -4,6 +4,7 @@ import 'app/common/helper/smart_card_helper.dart';
 import 'app/common/utils/log_utils.dart';
 
 GetIt injector = GetIt.asNewInstance();
+
 Future<void> initInjector() async {
   // Dio client
   //database

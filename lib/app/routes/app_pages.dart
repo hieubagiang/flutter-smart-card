@@ -17,5 +17,9 @@ abstract class AppPages {
         name: RouteList.connectCard,
         page: () => const CardConnectScreen(),
         binding: CardConnectBinding()),
+    GetPage(
+        name: RouteList.main,
+        page: () => const CardConnectScreen(),
+        binding: CardConnectBinding()),
   ];
 }

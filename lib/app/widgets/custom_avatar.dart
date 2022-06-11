@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:smart_card/app/common/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_card/app/common/utils/utils.dart';
 
 class CustomAvatar extends StatefulWidget {
   final String? fullName;

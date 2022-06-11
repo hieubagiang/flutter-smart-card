@@ -1,5 +1,6 @@
-import '../../common/utils/utils.dart';
 import 'package:flutter/material.dart';
+
+import '../../common/utils/utils.dart';
 
 class Consts {
   Consts._();

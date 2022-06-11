@@ -29,10 +29,10 @@ class ErrorDialog extends StatelessWidget {
               Text(errorMessage,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey[600])),
-              SizedBox(height: 10),
+              SizedBox(height: 10.h),
               InkWell(
                 onTap: () => SmartDialog.dismiss(),
-                child: Text(
+                child: const Text(
                   'OK',
                   style: TextStyle(color: Colors.blue),
                 ),

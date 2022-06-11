@@ -2,7 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 
+import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
+import '../../../common/helper/smart_card_helper.dart';
+import '../../../common/utils/log_utils.dart';
+import '../../../data/models/apdu_command_model.dart';
+import '../../../routes/app_pages.dart';
 
 class LoginController extends BaseController {
   var selectedIndex = 0.obs;
@@ -14,6 +19,8 @@ class LoginController extends BaseController {
   int lastTap = DateTime.now().millisecondsSinceEpoch;
   int consecutiveTaps = 1;
   var isFirst = true;
+  bool verifyCardResult = true; //Mock Verify card
+  SmartCardHelper smartCardHelper = injector.get<SmartCardHelper>();
 
   @override
   Future<void> onInit() async {
@@ -48,8 +55,22 @@ class LoginController extends BaseController {
     super.onClose();
   }
 
-  void onSubmitLogin() {
-    print(pinTextCtrl.text);
-    ;
+  Future<void> onSubmitLogin() async {
+    List<int> data = [...pinTextCtrl.text.codeUnits];
+    for (int i = 0; i < data.length; i++) {
+      data[i] = data[i] - 48;
+    }
+    final res = await smartCardHelper.sendApdu(ApduCommand(
+        cla: SmartCardConstant.walletCla,
+        ins: SmartCardConstant.verify,
+        p1: 0,
+        p2: 0,
+        data: data));
+    if (res?.sw[0] == SmartCardConstant.success) {
+      injector.get<LogUtils>().logI('Verify success');
+      Get.offAndToNamed(RouteList.main);
+    } else {
+      injector.get<LogUtils>().logI('Verify failed');
+    }
   }
 }
