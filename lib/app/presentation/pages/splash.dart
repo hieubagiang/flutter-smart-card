@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class Splash extends StatelessWidget {
-  const Splash({required Key key}) : super(key: key);
+  Splash({required Key key}) : super(key: key);
+  final Color? backgroundColour = Colors.indigoAccent[100];
 
   @override
   Widget build(BuildContext context) {

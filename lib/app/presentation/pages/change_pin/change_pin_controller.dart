@@ -7,14 +7,15 @@ import '../../../common/base/base_controller.dart';
 import '../../../common/helper/smart_card_helper.dart';
 import '../../../common/utils/log_utils.dart';
 import '../../../data/models/apdu_command_model.dart';
-import '../../../routes/app_pages.dart';
 
-class LoginController extends BaseController {
+class ChangePinController extends BaseController {
   var selectedIndex = 0.obs;
   RxInt chatTotalUnreadCount = 0.obs;
   List<BaseController> controllerList = [];
   RxBool isInitDone = false.obs;
-  TextEditingController pinTextCtrl = TextEditingController();
+  TextEditingController currentPinTextCtrl = TextEditingController();
+  TextEditingController newPinTextCtrl = TextEditingController();
+  TextEditingController confirmNewPinTextCtrl = TextEditingController();
 
   int lastTap = DateTime.now().millisecondsSinceEpoch;
   int consecutiveTaps = 1;
@@ -55,19 +56,29 @@ class LoginController extends BaseController {
     super.onClose();
   }
 
-  Future<void> onSubmitLogin() async {
-    List<int> data = pinStringToNumber(pinTextCtrl.text.codeUnits);
-    final res = await smartCardHelper.sendApdu(ApduCommand(
-        cla: SmartCardConstant.walletCla,
-        ins: SmartCardConstant.verify,
-        p1: 0,
-        p2: 0,
-        data: data));
-    if (res?.sw[0] == SmartCardConstant.success) {
-      injector.get<LogUtils>().logI('Verify success');
-      Get.offAndToNamed(RouteList.main);
-    } else {
-      injector.get<LogUtils>().logI('Verify failed');
+  Future<void> onSubmitChangePin() async {
+    if (newPinTextCtrl.text == confirmNewPinTextCtrl.text) {
+      List<int> data1 = pinStringToNumber(currentPinTextCtrl.text.codeUnits);
+      List<int> data = pinStringToNumber(newPinTextCtrl.text.codeUnits);
+      final verify = await smartCardHelper.sendApdu(ApduCommand(
+          cla: SmartCardConstant.walletCla,
+          ins: SmartCardConstant.verify,
+          p1: 0,
+          p2: 0,
+          data: data1));
+      if (verify?.sw[0] == SmartCardConstant.success) {
+        final res = await smartCardHelper.sendApdu(ApduCommand(
+            cla: SmartCardConstant.walletCla,
+            ins: SmartCardConstant.changePass,
+            p1: 0,
+            p2: 0,
+            data: data));
+        if (res?.sw[0] == SmartCardConstant.success) {
+          injector.get<LogUtils>().logI('Change pass success');
+        } else {
+          injector.get<LogUtils>().logI('Change pass failed');
+        }
+      }
     }
   }
 }

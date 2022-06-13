@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../injector.dart';
 import '../constants/constants.dart';
+import '../helper/smart_card_helper.dart';
 import '../utils/utils.dart';
 import 'widget_state.dart';
 
@@ -100,5 +102,11 @@ class BaseController extends SuperController
 
   void logWhenDebug(dynamic object, String message) {
     FunctionUtils.logWhenDebug(object, message);
+  }
+
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+    await injector.get<SmartCardHelper>().disconnect();
   }
 }

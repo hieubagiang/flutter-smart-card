@@ -156,4 +156,12 @@ class FunctionUtils {
     }
     return groupChatId;
   }
+
+  List<int> pinStringToNumber(List<int> stringCodeUnits) {
+    List<int> data = [...stringCodeUnits];
+    for (int i = 0; i < data.length; i++) {
+      data[i] = data[i] - 48;
+    }
+    return data;
+  }
 }
