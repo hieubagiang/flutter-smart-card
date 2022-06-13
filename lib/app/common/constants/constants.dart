@@ -14,6 +14,7 @@ class ConstantsUtils {
   //LOGIN
   static const String accessTokenKey = 'ACCESS_TOKEN_KEY';
   static const String loginIdKey = 'LOGIN_ID';
+  static const String pubKey = 'PUB_KEY';
 
   static const String chatApiKey = '2yfe9sav467x';
 }

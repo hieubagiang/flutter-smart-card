@@ -42,9 +42,24 @@ class StorageHelper {
     return null;
   }
 
+  static Future<String?> getPubKey() async {
+    if (box.read(ConstantsUtils.pubKey) != null) {
+      String data = await box.read(ConstantsUtils.pubKey);
+      return jsonDecode(data);
+    }
+    return null;
+  }
+
   static Future<void> setLoginId(String? loginId) async {
     await box.write(
       ConstantsUtils.loginIdKey,
+      jsonEncode(loginId ?? ""),
+    );
+  }
+
+  static Future<void> setPublicKey(String? loginId) async {
+    await box.write(
+      ConstantsUtils.pubKey,
       jsonEncode(loginId ?? ""),
     );
   }

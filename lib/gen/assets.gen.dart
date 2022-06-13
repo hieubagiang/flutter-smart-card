@@ -14,6 +14,9 @@ import 'package:flutter/services.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/finger.jpg
+  AssetGenImage get finger => const AssetGenImage('assets/images/finger.jpg');
+
   /// File path: assets/images/padlock.png
   AssetGenImage get padlock => const AssetGenImage('assets/images/padlock.png');
 
@@ -23,6 +26,20 @@ class $AssetsImagesGen {
 
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
+
+  /// File path: assets/svgs/circle.svg
+  SvgGenImage get circle => const SvgGenImage('assets/svgs/circle.svg');
+
+  /// File path: assets/svgs/ic_camera.svg
+  SvgGenImage get icCamera => const SvgGenImage('assets/svgs/ic_camera.svg');
+
+  /// File path: assets/svgs/ic_finger_print.svg
+  SvgGenImage get icFingerPrint =>
+      const SvgGenImage('assets/svgs/ic_finger_print.svg');
+
+  /// File path: assets/svgs/ic_fingerprint.svg
+  SvgGenImage get icFingerprint =>
+      const SvgGenImage('assets/svgs/ic_fingerprint.svg');
 
   /// File path: assets/svgs/side_menu_logo.svg
   SvgGenImage get sideMenuLogo =>

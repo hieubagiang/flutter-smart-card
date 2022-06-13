@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
@@ -133,5 +134,14 @@ class FileUtils {
         iosUiSettings: const IOSUiSettings(
           title: 'Crop Image',
         ));
+  }
+
+  static Future<File?> chooseImageWithFilePicker() async {
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+    return result?.files.single.path != null
+        ? File(result!.files.single.path!)
+        : null;
   }
 }

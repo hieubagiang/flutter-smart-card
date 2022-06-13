@@ -2,14 +2,16 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_card/app/common/utils/utils.dart';
+
+import '../../gen/assets.gen.dart';
 
 class CustomAvatar extends StatefulWidget {
   final String? fullName;
   final String? avatarUrl;
   final File? file;
   final String? asset;
+  final Widget? assetWidget;
   final Function()? onTap;
   final double? sizeAvatar;
   final Color? backgroundColor;
@@ -25,6 +27,7 @@ class CustomAvatar extends StatefulWidget {
     this.avatarUrl,
     this.file,
     this.asset,
+    this.assetWidget,
     this.onTap,
     this.sizeAvatar,
     this.backgroundColor,
@@ -76,16 +79,14 @@ class _CustomAvatarState extends State<CustomAvatar> {
                 right: 0,
                 child: Container(
                   padding: EdgeInsets.all(SpaceUtils.spaceSmall),
-                  width: 36,
-                  height: 36,
+                  width: 40.w,
+                  height: 40.w,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: ColorUtils.primaryColor,
                       border: Border.all(color: Colors.white, width: 2)),
-                  child: SvgPicture.asset(
-                    IconUtils.icCamera,
-                    color: ColorUtils.secondaryColor,
-                  ),
+                  child: Assets.svgs.icCamera
+                      .svg(color: ColorUtils.secondaryColor),
                 ),
               )
             : const SizedBox()
@@ -116,6 +117,9 @@ class _CustomAvatarState extends State<CustomAvatar> {
       );
     }
 
+    if (widget.assetWidget != null) {
+      return widget.assetWidget!;
+    }
     if (widget.asset != null && widget.asset!.isNotEmpty) {
       return CachedNetworkImage(
         cacheKey: widget.asset,

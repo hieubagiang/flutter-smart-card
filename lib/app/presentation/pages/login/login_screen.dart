@@ -58,9 +58,11 @@ class LoginScreen extends BaseView<LoginController> {
                       children: [
                         Expanded(
                           child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.unlockCard();
+                              },
                               child: Text(
-                                'forgot_password'.tr,
+                                'Mở khoá thẻ'.tr,
                                 style: StyleUtils.style18Normal.copyWith(
                                     color: ColorUtils.primaryTextColor),
                               )),

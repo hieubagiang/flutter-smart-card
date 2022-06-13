@@ -19,6 +19,8 @@ class SmartCardConstant {
   static int changePass = 0x70;
   static int insGetCardData = 0x13;
   static int success = 0x90;
+  static int genRsa = 0xd3;
+  static int getPublicKey = 0xf0;
 
   // maximum balance
   static int maxBalance = 0x7FFF;
@@ -70,7 +72,7 @@ class SmartCardHelper {
         injector.get<LogUtils>().logI('Using reader: $reader');
 
         card = await Pcsc.cardConnect(
-            ctx!, reader, PcscShare.shared, PcscProtocol.any);
+            ctx!, reader, PcscShare.shared, PcscProtocol.t1);
         final ApduResponse? response =
             await sendApdu(ApduCommand.connect(appletID: appletId));
         if (response != null) {

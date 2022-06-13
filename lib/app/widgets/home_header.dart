@@ -46,21 +46,23 @@ class HomeHeader extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text(
+                /*Text(
                   userRole,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: ColorUtils.hintTextColor,
                     height: 1.42,
                   ),
-                ),
+                ),*/
               ],
             ),
           ],
         ),
         CustomButton(
-          label: 'ĐĂNG XUẤT',
+          label: 'Đăng xuất',
           onTap: onLogout,
+          labelstyle: StyleUtils.style18Normal
+              .copyWith(color: ColorUtils.secondaryColor),
           bgColor: ColorUtils.primaryColor,
         ),
       ],

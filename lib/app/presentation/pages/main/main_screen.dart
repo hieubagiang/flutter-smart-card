@@ -6,6 +6,7 @@ import '../../../common/base/base_view_view_model.dart';
 import '../../../common/utils/utils.dart';
 import '../../../widgets/home_header.dart';
 import '../../../widgets/menu_item.dart';
+import '../profile/profile_screen.dart';
 import 'main_controller.dart';
 
 class MainScreen extends BaseView<MainController> {
@@ -25,7 +26,11 @@ class MainScreen extends BaseView<MainController> {
             child: Column(
               children: [
                 const SizedBox(height: 24),
-                Assets.svgs.sideMenuLogo.svg(),
+                Text(
+                  'CCCD App'.tr,
+                  style: StyleUtils.style36Bold
+                      .copyWith(color: ColorUtils.secondaryColor),
+                ),
                 const SizedBox(height: 50.0),
                 Obx(() {
                   return MenuItem(
@@ -74,7 +79,7 @@ class MainScreen extends BaseView<MainController> {
                       physics: const NeverScrollableScrollPhysics(),
                       controller: controller.tabController,
                       children: const [
-                        ChangePinScreen(),
+                        ProfileScreen(),
                         ChangePinScreen(),
                       ],
                     ),

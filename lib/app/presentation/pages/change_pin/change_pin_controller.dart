@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
@@ -66,6 +66,7 @@ class ChangePinController extends BaseController {
           p1: 0,
           p2: 0,
           data: data1));
+
       if (verify?.sw[0] == SmartCardConstant.success) {
         final res = await smartCardHelper.sendApdu(ApduCommand(
             cla: SmartCardConstant.walletCla,
@@ -75,9 +76,13 @@ class ChangePinController extends BaseController {
             data: data));
         if (res?.sw[0] == SmartCardConstant.success) {
           injector.get<LogUtils>().logI('Change pass success');
-        } else {
-          injector.get<LogUtils>().logI('Change pass failed');
+          Get.snackbar('', 'change_pin_success_message'.tr,
+              colorText: Colors.white, backgroundColor: Colors.green[400]);
         }
+      } else {
+        injector.get<LogUtils>().logI('Change pass failed');
+        Get.snackbar('', 'change_pin_failed_message'.tr,
+            colorText: Colors.white, backgroundColor: Colors.red[400]);
       }
     }
   }

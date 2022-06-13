@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
@@ -14,14 +14,14 @@ class LoginController extends BaseController {
   RxInt chatTotalUnreadCount = 0.obs;
   List<BaseController> controllerList = [];
   RxBool isInitDone = false.obs;
-  TextEditingController pinTextCtrl = TextEditingController();
+  TextEditingController pinTextCtrl = TextEditingController(text: '1234');
 
   int lastTap = DateTime.now().millisecondsSinceEpoch;
   int consecutiveTaps = 1;
   var isFirst = true;
   bool verifyCardResult = true; //Mock Verify card
+  int count = 3;
   SmartCardHelper smartCardHelper = injector.get<SmartCardHelper>();
-
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -31,6 +31,20 @@ class LoginController extends BaseController {
   Future<void> onReady() async {
     super.onReady();
     // commonController.startLoading();
+    // onSubmitLogin();
+    await smartCardHelper.sendApdu(ApduCommand(
+        cla: SmartCardConstant.walletCla,
+        ins: SmartCardConstant.genRsa,
+        p1: 0,
+        p2: 0,
+        data: [0]));
+    await smartCardHelper.sendApdu(ApduCommand(
+        cla: SmartCardConstant.walletCla,
+        ins: SmartCardConstant.getPublicKey,
+        p1: 0,
+        p2: 0,
+        data: [0]));
+    // await StorageHelper.setPublicKey(String.fromCharCodes(res!.sn));
   }
 
   void handleIndexChanged(int index) {
@@ -67,7 +81,31 @@ class LoginController extends BaseController {
       injector.get<LogUtils>().logI('Verify success');
       Get.offAndToNamed(RouteList.main);
     } else {
-      injector.get<LogUtils>().logI('Verify failed');
+      Get.snackbar('', 'Mở khoá thẻ thành công'.tr,
+          colorText: Colors.white, backgroundColor: Colors.green[400]);
+    }
+  }
+
+  Future<void> unlockCard() async {
+    if (count == 0) {
+      Get.snackbar('', 'Thẻ bị khoá'.tr,
+          colorText: Colors.white, backgroundColor: Colors.green[400]);
+      return;
+    }
+    final res = await smartCardHelper.sendApdu(ApduCommand(
+        cla: SmartCardConstant.walletCla,
+        ins: SmartCardConstant.unblock,
+        p1: 0,
+        p2: 0,
+        data: []));
+    if (res?.sw[0] == SmartCardConstant.success) {
+      injector.get<LogUtils>().logI('Mở khoá thẻ thành công');
+      Get.snackbar('', 'Mở khoá thẻ thành công'.tr,
+          colorText: Colors.white, backgroundColor: Colors.green[400]);
+    } else {
+      count--;
+      Get.snackbar('', 'Mở khoá thẻ thất bại'.tr,
+          colorText: Colors.white, backgroundColor: Colors.green[400]);
     }
   }
 }
