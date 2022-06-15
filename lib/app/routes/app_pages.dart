@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:smart_card/app/presentation/pages/card_connect/card_connect_binding.dart';
 import 'package:smart_card/app/presentation/pages/card_connect/card_connect_screen.dart';
 import 'package:smart_card/app/presentation/pages/login/login_screen.dart';
+import 'package:smart_card/app/presentation/pages/main/main_binding.dart';
+import 'package:smart_card/app/presentation/pages/main/main_screen.dart';
 
 import '../presentation/pages/login/login_binding.dart';
 
@@ -19,7 +21,7 @@ abstract class AppPages {
         binding: CardConnectBinding()),
     GetPage(
         name: RouteList.main,
-        page: () => const CardConnectScreen(),
-        binding: CardConnectBinding()),
+        page: () => const MainScreen(),
+        binding: MainBinding()),
   ];
 }

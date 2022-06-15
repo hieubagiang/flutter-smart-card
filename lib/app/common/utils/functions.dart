@@ -156,4 +156,38 @@ class FunctionUtils {
     }
     return groupChatId;
   }
+
+  List<int> pinStringToNumber(List<int> stringCodeUnits) {
+    List<int> data = [...stringCodeUnits];
+    for (int i = 0; i < data.length; i++) {
+      data[i] = data[i] - 48;
+    }
+    return data;
+  }
+
+  static Future<DateTime?> selectDate(BuildContext context) async {
+    final DateTime? _pickedDate = await showDatePicker(
+        context: context,
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: ColorUtils.primaryColor,
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: ColorUtils.primaryColor, // button text color
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        },
+        initialDate: DateTime(DateTime.now().year - 22, DateTime.now().month),
+        firstDate: DateTime(DateTime.now().year - 60, DateTime.now().month),
+        lastDate: DateTime(DateTime.now().year - 18, DateTime.now().month));
+    // FocusScope.of(context).requestFocus(FocusNode());
+
+    return _pickedDate;
+  }
 }

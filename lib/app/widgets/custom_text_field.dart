@@ -10,6 +10,8 @@ class CustomTextField extends StatelessWidget {
   final bool isRequire;
   final int line;
   final bool isSecure;
+  final bool isEnable;
+  final EdgeInsets? padding;
 
   const CustomTextField({
     required this.controller,
@@ -19,7 +21,9 @@ class CustomTextField extends StatelessWidget {
     this.isRequire = false,
     this.line = 1,
     this.titleStyle,
+    this.padding,
     this.isSecure = false,
+    this.isEnable = true,
   }) : super(key: key);
 
   @override
@@ -35,14 +39,15 @@ class CustomTextField extends StatelessWidget {
         SizedBox(
           height: 8.h,
         ),
-        TextField(
+        TextFormField(
           controller: controller,
           obscureText: isSecure,
+          enabled: isEnable,
           style:
-              StyleUtils.style18Medium.copyWith(color: ColorUtils.blackColor),
+              StyleUtils.style18Normal.copyWith(color: ColorUtils.blackColor),
           decoration: InputDecoration(
-            // isDense: true,
-            contentPadding:
+            isDense: true,
+            contentPadding: padding ??
                 EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
             hintText: hintText,
             hintStyle: StyleUtils.style18Normal.copyWith(

@@ -4,10 +4,10 @@ import 'package:smart_card/app/common/utils/utils.dart';
 import '../../../common/base/base_view_view_model.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_text_field.dart';
-import 'login_controller.dart';
+import 'change_pin_controller.dart';
 
-class LoginScreen extends BaseView<LoginController> {
-  const LoginScreen({Key? key}) : super(key: key);
+class ChangePinScreen extends BaseView<ChangePinController> {
+  const ChangePinScreen({Key? key}) : super(key: key);
 
   @override
   Widget vBuilder(BuildContext context) {
@@ -20,7 +20,7 @@ class LoginScreen extends BaseView<LoginController> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Căn cước công dân',
+              'change_pin'.tr,
               style: StyleUtils.style36Bold,
             ),
             SizedBox(
@@ -39,50 +39,35 @@ class LoginScreen extends BaseView<LoginController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      'login'.tr,
-                      style: StyleUtils.style18Bold.copyWith(
-                          fontSize: 26.sp,
-                          height: 1.3,
-                          color: ColorUtils.primaryTextColor),
-                    ),
                     CustomTextField(
-                      title: 'pin'.tr,
+                      title: 'current_pin'.tr,
                       titleStyle: StyleUtils.style18Normal
                           .copyWith(color: Colors.black),
                       isSecure: true,
-                      controller: controller.pinTextCtrl,
+                      controller: controller.currentPinTextCtrl,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: TextButton(
-                              onPressed: () {
-                                controller.unlockCard();
-                              },
-                              child: Text(
-                                'Mở khoá thẻ'.tr,
-                                style: StyleUtils.style18Normal.copyWith(
-                                    color: ColorUtils.primaryTextColor),
-                              )),
-                        ),
-                        Expanded(
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'register'.tr,
-                                style: StyleUtils.style18Normal.copyWith(
-                                    color: ColorUtils.primaryTextColor),
-                              )),
-                        ),
-                      ],
+                    CustomTextField(
+                      title: 'new_pin'.tr,
+                      titleStyle: StyleUtils.style18Normal
+                          .copyWith(color: Colors.black),
+                      isSecure: true,
+                      controller: controller.newPinTextCtrl,
+                    ),
+                    CustomTextField(
+                      title: 'confirm_new_pin'.tr,
+                      titleStyle: StyleUtils.style18Normal
+                          .copyWith(color: Colors.black),
+                      isSecure: true,
+                      controller: controller.confirmNewPinTextCtrl,
+                    ),
+                    SizedBox(
+                      height: 16.h,
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: CustomButton(
-                        label: 'login'.tr,
-                        onTap: controller.onSubmitLogin,
+                        label: 'change_pin'.tr,
+                        onTap: controller.onSubmitChangePin,
                         labelstyle: StyleUtils.style18Normal
                             .copyWith(color: Colors.white),
                         bgColor: ColorUtils.primaryColor,

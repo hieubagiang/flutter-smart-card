@@ -1,15 +1,23 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:smart_card/app/routes/app_pages.dart';
+
+import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
+import '../../../common/helper/smart_card_helper.dart';
 
-class MainController extends BaseController {
-  static final MainController _singleton = MainController._internal();
+class MainController extends BaseController
+    with GetSingleTickerProviderStateMixin {
+  // static final MainController _singleton = MainController._internal();
+  late TabController tabController;
 
-  factory MainController() {
-    return _singleton;
-  }
+  //
+  // factory MainController() {
+  //   return _singleton;
+  // }
 
-  MainController._internal();
+  // MainController._internal();
 
   var selectedIndex = 0.obs;
   RxInt chatTotalUnreadCount = 0.obs;
@@ -23,6 +31,10 @@ class MainController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    tabController = TabController(vsync: this, length: 2, initialIndex: 0)
+      ..addListener(() {
+        onChangeTab(tabController.index);
+      });
   }
 
   @override
@@ -51,5 +63,12 @@ class MainController extends BaseController {
   @override
   Future<void> onClose() async {
     super.onClose();
+  }
+
+  void onTapChangePin() {}
+
+  void logout() {
+    injector.get<SmartCardHelper>().disconnect();
+    Get.offAllNamed(RouteList.connectCard);
   }
 }

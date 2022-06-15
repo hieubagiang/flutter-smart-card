@@ -23,6 +23,7 @@ class CardConnectController extends BaseController {
   Future<void> onReady() async {
     super.onReady();
     // commonController.startLoading();
+    // onSubmitCardConnect();
   }
 
   @override
@@ -39,6 +40,7 @@ class CardConnectController extends BaseController {
     final success = await injector
         .get<SmartCardHelper>()
         .connectCard(SmartCardConstant.appletID);
+
     if (success) {
       Get.toNamed(RouteList.signIn);
     } else {
