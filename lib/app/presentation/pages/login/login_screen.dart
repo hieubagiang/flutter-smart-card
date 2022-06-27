@@ -70,7 +70,18 @@ class LoginScreen extends BaseView<LoginController> {
                         Expanded(
                           child: TextButton(
                               onPressed: () {
-                                controller.verifyCardRsa();
+                                // controller.sign();
+                              },
+                              child: Text(
+                                'test sign'.tr,
+                                style: StyleUtils.style18Normal.copyWith(
+                                    color: ColorUtils.primaryTextColor),
+                              )),
+                        ),
+                        Expanded(
+                          child: TextButton(
+                              onPressed: () {
+                                // controller();
                               },
                               child: Text(
                                 'Tesst'.tr,

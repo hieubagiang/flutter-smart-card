@@ -7,4 +7,6 @@ abstract class RouteList {
   static const main = '/main';
   static const admin = '/admin';
   static const connectCard = '/connect_card';
+
+  static const taxScreen = '/tax_screen';
 }

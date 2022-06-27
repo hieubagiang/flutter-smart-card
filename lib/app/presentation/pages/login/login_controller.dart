@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:basic_utils/basic_utils.dart';
@@ -36,39 +37,30 @@ class LoginController extends BaseController {
     super.onReady();
     // commonController.startLoading();
     // onSubmitLogin();
-    await _genRsaAndGet();
     // await StorageHelper.setPublicKey(String.fromCharCodes(res!.sn));
   }
 
-  Future<void> _genRsaAndGet() async {
-    await smartCardHelper.sendApdu(ApduCommand(
-        cla: SmartCardConstant.walletCla,
-        ins: SmartCardConstant.signUpCard,
-        p1: 0,
-        p2: 0,
-        data: [0]));
-    final exponentBytes = (await smartCardHelper.sendApdu(ApduCommand(
-      cla: SmartCardConstant.walletCla,
-      ins: SmartCardConstant.getExponent,
-      p1: 0,
-      p2: 0,
-    )))
-        ?.sn;
+  encodePublicKeyToPem(RSAPublicKey publicKey) {
+    var algorithmSeq = new ASN1Sequence();
+    var algorithmAsn1Obj = new ASN1Object.fromBytes(Uint8List.fromList(
+        [0x6, 0x9, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0xd, 0x1, 0x1, 0x1]));
+    var paramsAsn1Obj =
+        new ASN1Object.fromBytes(Uint8List.fromList([0x5, 0x0]));
+    algorithmSeq.add(algorithmAsn1Obj);
+    algorithmSeq.add(paramsAsn1Obj);
 
-    final modulusBytes = (await smartCardHelper.sendApdu(ApduCommand(
-      cla: SmartCardConstant.walletCla,
-      ins: SmartCardConstant.getModulus,
-      p1: 0,
-      p2: 0,
-    )))
-        ?.sn;
+    var publicKeySeq = ASN1Sequence();
+    publicKeySeq.add(ASN1Integer(publicKey.modulus));
+    publicKeySeq.add(ASN1Integer(publicKey.exponent));
+    var publicKeySeqBitString =
+        ASN1BitString(stringValues: publicKeySeq.encodedBytes);
 
-    ///TODO Call API to sav e public key
-    final modulus = decodeBigInt(modulusBytes ?? []);
-    final exponent = decodeBigInt(exponentBytes ?? []);
+    var topLevelSeq = ASN1Sequence();
+    topLevelSeq.add(algorithmSeq);
+    topLevelSeq.add(publicKeySeqBitString);
+    var dataBase64 = base64Encode(topLevelSeq.encodedBytes!);
 
-    publicKey = RSAPublicKey(modulus, exponent);
-    // var public = CryptoUtils.encodeRSAPublicKeyToPem(publicKey!);
+    return """-----BEGIN PUBLIC KEY-----\r\n$dataBase64\r\n-----END PUBLIC KEY-----""";
   }
 
   void handleIndexChanged(int index) {
@@ -131,22 +123,5 @@ class LoginController extends BaseController {
       Get.snackbar('', 'Mở khoá thẻ thất bại'.tr,
           colorText: Colors.white, backgroundColor: Colors.green[400]);
     }
-  }
-
-  Future<bool> verifyCardRsa() async {
-    final data = randomString(8).codeUnits;
-    final signed = (await smartCardHelper.sendApdu(ApduCommand(
-            cla: SmartCardConstant.walletCla,
-            ins: SmartCardConstant.signRsa,
-            p1: 0,
-            p2: 0,
-            data: data)))
-        ?.sn;
-
-    verified = CryptoUtils.rsaVerify(
-        publicKey!, Uint8List.fromList(data), Uint8List.fromList(signed!),
-        algorithm: 'SHA-1/RSA');
-
-    return verified;
   }
 }
