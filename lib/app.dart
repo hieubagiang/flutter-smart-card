@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 
 import 'app/common/utils/utils.dart';
 import 'app/routes/app_pages.dart';
@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             getPages: AppPages.pages,
             translations: MyTranslations(),
+            defaultTransition: Transition.upToDown,
             locale: MyTranslations.fallbackLocale,
             navigatorObservers: [FlutterSmartDialog.observer],
             fallbackLocale: MyTranslations.fallbackLocale,
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate, // Here !
               DefaultWidgetsLocalizations.delegate,
             ],
-            initialRoute: RouteList.connectCard,
+            initialRoute: RouteList.main,
 
             /*
               FirebaseAuth.instance.currentUser == null

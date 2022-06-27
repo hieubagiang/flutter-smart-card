@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../common/utils/colors_utils.dart';
 
-class MenuItem extends StatelessWidget {
+class CustomMenuItem extends StatelessWidget {
   final VoidCallback onTap;
   final String? icon;
   final String label;
   final bool selected;
   final Widget? iconWidget;
-  const MenuItem({
+  const CustomMenuItem({
     required this.onTap,
     this.icon,
     this.label = 'Label',

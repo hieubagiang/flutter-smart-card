@@ -7,7 +7,8 @@ import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
 import '../../../common/helper/smart_card_helper.dart';
 
-class MainController extends BaseController with GetSingleTickerProviderStateMixin {
+class MainController extends BaseController
+    with GetSingleTickerProviderStateMixin {
   // static final MainController _singleton = MainController._internal();
   late TabController tabController;
 

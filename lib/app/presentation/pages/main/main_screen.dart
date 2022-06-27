@@ -30,11 +30,12 @@ class MainScreen extends BaseView<MainController> {
                 const SizedBox(height: 24),
                 Text(
                   'CCCD App'.tr,
-                  style: StyleUtils.style36Bold.copyWith(color: ColorUtils.secondaryColor),
+                  style: StyleUtils.style36Bold
+                      .copyWith(color: ColorUtils.secondaryColor),
                 ),
                 const SizedBox(height: 50.0),
                 Obx(() {
-                  return MenuItem(
+                  return CustomMenuItem(
                     onTap: () {
                       controller.tabController.animateTo(0);
                     },
@@ -44,7 +45,7 @@ class MainScreen extends BaseView<MainController> {
                   );
                 }),
                 Obx(() {
-                  return MenuItem(
+                  return CustomMenuItem(
                     onTap: () {
                       controller.tabController.animateTo(1);
                     },
@@ -54,7 +55,7 @@ class MainScreen extends BaseView<MainController> {
                   );
                 }),
                 Obx(() {
-                  return MenuItem(
+                  return CustomMenuItem(
                     onTap: () {
                       controller.tabController.animateTo(2);
                     },
@@ -64,7 +65,7 @@ class MainScreen extends BaseView<MainController> {
                   );
                 }),
                 Obx(() {
-                  return MenuItem(
+                  return CustomMenuItem(
                     onTap: () {
                       controller.tabController.animateTo(3);
                     },
@@ -87,7 +88,8 @@ class MainScreen extends BaseView<MainController> {
                     child: HomeHeader(
                       userName: 'Phạm Doãn Hiếu',
                       userRole: 'user',
-                      avatar: 'https://i.pinimg.com/564x/44/15/ba/4415ba5df0f4bfcee5893d6c441577e0.jpg',
+                      avatar:
+                          'https://i.pinimg.com/564x/44/15/ba/4415ba5df0f4bfcee5893d6c441577e0.jpg',
                       onLogout: () {
                         controller.logout();
                       },
