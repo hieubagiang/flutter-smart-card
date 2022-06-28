@@ -8,6 +8,7 @@ import '../../../common/utils/utils.dart';
 import '../../../widgets/home_header.dart';
 import '../../../widgets/menu_item.dart';
 import '../profile/profile_screen.dart';
+import '../purchase_screen/purchase_screen.dart';
 import 'main_controller.dart';
 
 class MainScreen extends BaseView<MainController> {
@@ -62,6 +63,16 @@ class MainScreen extends BaseView<MainController> {
                     selected: controller.selectedIndex.value == 2,
                   );
                 }),
+                Obx(() {
+                  return MenuItem(
+                    onTap: () {
+                      controller.tabController.animateTo(3);
+                    },
+                    icon: Assets.images.padlock.path,
+                    label: 'purchase'.tr,
+                    selected: controller.selectedIndex.value == 3,
+                  );
+                }),
               ],
             ),
           ),
@@ -91,6 +102,7 @@ class MainScreen extends BaseView<MainController> {
                         ProfileScreen(),
                         ChangePinScreen(),
                         TaxScreen(),
+                        PurchaseScreen(),
                       ],
                     ),
                   ),

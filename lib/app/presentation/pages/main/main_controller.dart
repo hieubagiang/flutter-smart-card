@@ -30,7 +30,7 @@ class MainController extends BaseController with GetSingleTickerProviderStateMix
   @override
   Future<void> onInit() async {
     super.onInit();
-    tabController = TabController(vsync: this, length: 3, initialIndex: 0)
+    tabController = TabController(vsync: this, length: 4, initialIndex: 0)
       ..addListener(() {
         onChangeTab(tabController.index);
       });

@@ -111,7 +111,7 @@ class RegisterTax extends StatelessWidget {
               width: 20,
               child: CustomButton(
                 onTap: () {
-                  _showBottomSheet(context);
+                  // _showBottomSheet(context);
                 },
                 bgColor: ColorUtils.primaryColor,
                 label: 'Thanh toán',

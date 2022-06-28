@@ -12,4 +12,5 @@ final Map<String, String> viVn = {
   'change_pin': 'Đổi mã pin',
   'sign_in': 'Đăng ký',
   'tax': 'Thuế',
+  'purchase': 'Nạp tiền',
 };
