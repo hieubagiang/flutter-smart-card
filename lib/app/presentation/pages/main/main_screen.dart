@@ -9,6 +9,8 @@ import '../../../widgets/home_header.dart';
 import '../../../widgets/menu_item.dart';
 import '../profile/profile_screen.dart';
 import '../purchase_screen/purchase_screen.dart';
+import '../regist_tax/registration_tax_screen.dart';
+import '../tax_declaration/tax_declaration_screen.dart';
 import 'main_controller.dart';
 
 class MainScreen extends BaseView<MainController> {
@@ -74,6 +76,26 @@ class MainScreen extends BaseView<MainController> {
                     selected: controller.selectedIndex.value == 3,
                   );
                 }),
+                Obx(() {
+                  return CustomMenuItem(
+                    onTap: () {
+                      controller.tabController.animateTo(2);
+                    },
+                    icon: Assets.images.padlock.path,
+                    label: 'đăng ký thuế'.tr,
+                    selected: controller.selectedIndex.value == 2,
+                  );
+                }),
+                Obx(() {
+                  return CustomMenuItem(
+                    onTap: () {
+                      controller.tabController.animateTo(3);
+                    },
+                    icon: Assets.images.padlock.path,
+                    label: 'kê khai thuế'.tr,
+                    selected: controller.selectedIndex.value == 3,
+                  );
+                }),
               ],
             ),
           ),
@@ -105,6 +127,8 @@ class MainScreen extends BaseView<MainController> {
                         ChangePinScreen(),
                         TaxScreen(),
                         PurchaseScreen(),
+                        RegistrationTaxScreen(),
+                        TaxDeclarationScreen()
                       ],
                     ),
                   ),

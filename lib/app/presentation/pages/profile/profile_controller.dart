@@ -18,17 +18,25 @@ class ProfileController extends BaseController {
   RxInt chatTotalUnreadCount = 0.obs;
   List<BaseController> controllerList = [];
   RxBool isInitDone = false.obs;
-  TextEditingController cardIdTextCtrl = TextEditingController(text: '1'.padLeft(9, '0'));
-  TextEditingController fullNameTextCtrl = TextEditingController(text: 'Phạm Doãn Hiếu');
-  TextEditingController nationalityTextCtrl = TextEditingController(text: 'Việt Nam');
-  TextEditingController placeOfOriginTextCtrl = TextEditingController(text: 'Hà TĨnh');
-  TextEditingController placeOfResidenceTextCtrl = TextEditingController(text: 'Hà Nội');
-  TextEditingController personalIdentificationTextCtrl = TextEditingController(text: 'Nốt ruồi dưới cằm');
-  TextEditingController releaseDateTextCtrl =
-      TextEditingController(text: DateTimeUtils.getStringDate(DateTime.now(), pattern: Pattern.ddMMyyyy_vi));
+  TextEditingController cardIdTextCtrl =
+      TextEditingController(text: '1'.padLeft(9, '0'));
+  TextEditingController fullNameTextCtrl =
+      TextEditingController(text: 'Phạm Doãn Hiếu');
+  TextEditingController nationalityTextCtrl =
+      TextEditingController(text: 'Việt Nam');
+  TextEditingController placeOfOriginTextCtrl =
+      TextEditingController(text: 'Hà TĨnh');
+  TextEditingController placeOfResidenceTextCtrl =
+      TextEditingController(text: 'Hà Nội');
+  TextEditingController personalIdentificationTextCtrl =
+      TextEditingController(text: 'Nốt ruồi dưới cằm');
+  TextEditingController releaseDateTextCtrl = TextEditingController(
+      text: DateTimeUtils.getStringDate(DateTime.now(),
+          pattern: Pattern.ddMMyyyy_vi));
   TextEditingController expireDateTextCtrl = TextEditingController(
-      text:
-          DateTimeUtils.getStringDate(DateTime.now().add(const Duration(days: 365 * 5)), pattern: Pattern.ddMMyyyy_vi));
+      text: DateTimeUtils.getStringDate(
+          DateTime.now().add(const Duration(days: 365 * 5)),
+          pattern: Pattern.ddMMyyyy_vi));
   Rx<DateTime?> birthDay = Rx(DateTime.now());
   Rx<GenderType> selectedGender = Rx(GenderType.male);
   bool verifyCardResult = true; //Mock Verify card
@@ -77,28 +85,37 @@ class ProfileController extends BaseController {
     final user = UserModel(
         cardId: cardIdTextCtrl.text,
         pin: '1234',
-        avatarImage: FileUtils.base64EncodeFormat(selectAvatarFile.value!.readAsBytesSync()),
-        fingerPrintImage: FileUtils.base64EncodeFormat(selectAvatarFile.value!.readAsBytesSync()),
+        avatarImage: FileUtils.base64EncodeFormat(
+            selectAvatarFile.value!.readAsBytesSync()),
+        fingerPrintImage: FileUtils.base64EncodeFormat(
+            selectAvatarFile.value!.readAsBytesSync()),
         fullName: fullNameTextCtrl.text,
         placeOfResidence: placeOfResidenceTextCtrl.text,
         sex: selectedGender.value,
         nationality: nationalityTextCtrl.text,
         birthday: birthDay.value!,
-        expiredDate: DateTimeUtils.getDateTime(expireDateTextCtrl.text, pattern: Pattern.ddMMyyyy_vi),
-        releaseDate: DateTimeUtils.getDateTime(releaseDateTextCtrl.text, pattern: Pattern.ddMMyyyy_vi),
+        expiredDate: DateTimeUtils.getDateTime(expireDateTextCtrl.text,
+            pattern: Pattern.ddMMyyyy_vi),
+        releaseDate: DateTimeUtils.getDateTime(releaseDateTextCtrl.text,
+            pattern: Pattern.ddMMyyyy_vi),
         personalIdentification: personalIdentificationTextCtrl.text,
         placeOfOrigin: placeOfOriginTextCtrl.text,
         amount: 0);
     List<int> data = utf8.encode(user.simplify());
-    final verify = await smartCardHelper.sendApdu(
-        ApduCommand(cla: SmartCardConstant.walletCla, ins: SmartCardConstant.signUpCard, p1: 0, p2: 0, data: data));
+    final verify = await smartCardHelper.sendApdu(ApduCommand(
+        cla: SmartCardConstant.walletCla,
+        ins: SmartCardConstant.signUpCard,
+        p1: 0,
+        p2: 0,
+        data: data));
     if (verify?.sw[0] == SmartCardConstant.success) {
       injector.get<LogUtils>().logI('Create profile successful');
-      Get.snackbar('', 'Create profile successful'.tr, colorText: Colors.white, backgroundColor: Colors.green[400]);
-      getCardInfo();
+      Get.snackbar('', 'Create profile successful'.tr,
+          colorText: Colors.white, backgroundColor: Colors.green[400]);
     } else {
       injector.get<LogUtils>().logI('failed');
-      Get.snackbar('', 'failed_message'.tr, colorText: Colors.white, backgroundColor: Colors.red[400]);
+      Get.snackbar('', 'failed_message'.tr,
+          colorText: Colors.white, backgroundColor: Colors.red[400]);
     }
   }
 
@@ -112,16 +129,21 @@ class ProfileController extends BaseController {
   }
 
   Future<UserModel?> getCardInfo() async {
-    final res = await smartCardHelper
-        .sendApdu(ApduCommand(cla: SmartCardConstant.walletCla, ins: SmartCardConstant.insGetCardData, p1: 0, p2: 0));
+    final res = await smartCardHelper.sendApdu(ApduCommand(
+        cla: SmartCardConstant.walletCla,
+        ins: SmartCardConstant.insGetCardData,
+        p1: 0,
+        p2: 0));
     if (res?.sw[0] == SmartCardConstant.success) {
       injector.get<LogUtils>().logI('Create profile successful');
-      Get.snackbar('', 'Create profile successful'.tr, colorText: Colors.white, backgroundColor: Colors.green[400]);
+      Get.snackbar('', 'Create profile successful'.tr,
+          colorText: Colors.white, backgroundColor: Colors.green[400]);
       return UserModel.fromRaw(utf8.decode(res!.sn));
       // ();
     } else {
       injector.get<LogUtils>().logI('failed');
-      Get.snackbar('', 'failed_message'.tr, colorText: Colors.white, backgroundColor: Colors.red[400]);
+      Get.snackbar('', 'failed_message'.tr,
+          colorText: Colors.white, backgroundColor: Colors.red[400]);
     }
     return null;
   }
