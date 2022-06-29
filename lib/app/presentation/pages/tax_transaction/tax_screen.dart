@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:smart_card/app/common/base/base_view_view_model.dart';
 import 'package:smart_card/app/common/utils/colors_utils.dart';
 import 'package:smart_card/app/presentation/pages/tax_transaction/tax_controller.dart';
@@ -8,7 +7,6 @@ import 'package:smart_card/gen/assets.gen.dart';
 
 import '../../../common/utils/layout_utils.dart';
 import '../../../common/utils/styles.dart';
-import '../../../widgets/custom_button.dart';
 
 enum SingingCharacter { thanhtoan }
 
@@ -18,13 +16,13 @@ class TaxScreen extends BaseView<TaxController> {
   Widget vBuilder(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorUtils.backgroundColor,
-        body: Container(
+        body: SizedBox(
           height: 1.sh,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 180,
+              SizedBox(
+                height: 180.h,
                 // color: Colors.black,
                 child: Row(
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -35,7 +33,8 @@ class TaxScreen extends BaseView<TaxController> {
                         controller.tabController.animateTo(0);
                       },
                       description: 'Kê khai thuế',
-                      svgImage: Assets.svgs.elumerTax.svg(color: ColorUtils.iconTaxColor),
+                      svgImage: Assets.svgs.elumerTax
+                          .svg(color: ColorUtils.iconTaxColor),
                       isSelect: controller.selectedIndex.value == 0,
                     ),
                     TaxWidgetItem(
@@ -53,7 +52,8 @@ class TaxScreen extends BaseView<TaxController> {
                         controller.tabController.animateTo(2);
                       },
                       description: 'Nộp thuế',
-                      svgImage: Assets.svgs.submiTax.svg(color: ColorUtils.iconTaxColor),
+                      svgImage: Assets.svgs.submiTax
+                          .svg(color: ColorUtils.iconTaxColor),
                       isSelect: controller.selectedIndex.value == 2,
                     ),
                   ],
@@ -63,7 +63,11 @@ class TaxScreen extends BaseView<TaxController> {
                 child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: controller.tabController,
-                    children: [RegisterTax(), RegisterTax(), RegisterTax()]),
+                    children: const [
+                      RegisterTax(),
+                      RegisterTax(),
+                      RegisterTax()
+                    ]),
               )
             ],
           ),
@@ -72,8 +76,8 @@ class TaxScreen extends BaseView<TaxController> {
 }
 
 class RowTitle extends StatelessWidget {
-  String? title;
-  RowTitle({Key? key, this.title}) : super(key: key);
+  final String? title;
+  const RowTitle({Key? key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,14 +86,16 @@ class RowTitle extends StatelessWidget {
         color: Colors.black12,
         child: Center(
             child: Text(title ?? 'Chọn thanh toán',
-                style: StyleUtils.style16Bold.copyWith(color: ColorUtils.blackColor))));
+                style: StyleUtils.style16Bold
+                    .copyWith(color: ColorUtils.blackColor))));
   }
 }
 
 class RowItemInfor extends StatelessWidget {
-  String? normalText;
-  String? boldText;
-  RowItemInfor({Key? key, this.normalText, this.boldText}) : super(key: key);
+  final String? normalText;
+  final String? boldText;
+  const RowItemInfor({Key? key, this.normalText, this.boldText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +104,13 @@ class RowItemInfor extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: normalText ?? 'Họ và tên :  ',
-          style: StyleUtils.style16Normal.copyWith(color: ColorUtils.blackColor),
+          style:
+              StyleUtils.style16Normal.copyWith(color: ColorUtils.blackColor),
           children: <TextSpan>[
             TextSpan(
-              text: boldText ?? 'Phạm Doãn Hiếu', style: StyleUtils.style16Bold.copyWith(color: ColorUtils.blackColor),
+              text: boldText ?? 'Phạm Doãn Hiếu',
+              style:
+                  StyleUtils.style16Bold.copyWith(color: ColorUtils.blackColor),
               // TextSpan(text: ' world!'),
             )
           ],
@@ -112,11 +121,17 @@ class RowItemInfor extends StatelessWidget {
 }
 
 class TaxWidgetItem extends StatelessWidget {
-  Widget? svgImage;
-  VoidCallback? onTap;
-  String? description;
-  bool isSelect;
-  TaxWidgetItem({Key? key, this.onTap, this.svgImage, this.description, this.isSelect = false}) : super(key: key);
+  final Widget? svgImage;
+  final VoidCallback? onTap;
+  final String? description;
+  final bool isSelect;
+  const TaxWidgetItem(
+      {Key? key,
+      this.onTap,
+      this.svgImage,
+      this.description,
+      this.isSelect = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +146,7 @@ class TaxWidgetItem extends StatelessWidget {
               padding: EdgeInsets.all(SpaceUtils.spaceSmall),
               width: 100.w,
               height: 100.w,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: ColorUtils.taxItemColor,
               ),
@@ -139,7 +154,8 @@ class TaxWidgetItem extends StatelessWidget {
             ),
             Text(
               description ?? '',
-              style: StyleUtils.style16Medium.copyWith(color: ColorUtils.blackColor),
+              style: StyleUtils.style16Medium
+                  .copyWith(color: ColorUtils.blackColor),
             )
           ],
         ),

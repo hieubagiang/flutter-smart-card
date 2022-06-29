@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:smart_card/app/presentation/pages/purchase_screen/purchase_controller.dart';
 
@@ -22,10 +21,11 @@ class PurchaseScreen extends BaseView<PurchaseController> {
         // mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 20.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 18.0, vertical: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 CardItem(),
                 CardItem(
                   text: 'Chuyển khoản',
@@ -44,33 +44,38 @@ class PurchaseScreen extends BaseView<PurchaseController> {
           ),
           Container(
             height: 500,
-            decoration: BoxDecoration(border: Border.all(color: Colors.black38)),
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.black38)),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     height: 300,
                     width: 300,
-                    decoration: BoxDecoration(border: Border.all(color: ColorUtils.primaryColor)),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: ColorUtils.primaryColor)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         QrImage(
-                          data: "2|99|0941716670|0941716670|neucodethi@gmail.com|0|0|1",
+                          data:
+                              "2|99|0941716670|0941716670|neucodethi@gmail.com|0|0|1",
                           version: QrVersions.auto,
                           size: 200.0,
                         ),
                         Text(
                           'Sử dụng App Momo hoặc \nSử dụng Camera hỗ trợ QR code để \nquét mã',
-                          style: StyleUtils.style16Bold.copyWith(color: ColorUtils.primaryColor),
+                          style: StyleUtils.style16Bold
+                              .copyWith(color: ColorUtils.primaryColor),
                         )
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                   Column(
@@ -78,28 +83,34 @@ class PurchaseScreen extends BaseView<PurchaseController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text('Nội dung chuyển tiền',
-                          style: StyleUtils.style16Bold.copyWith(color: ColorUtils.primaryColor)),
-                      Container(
-                        width: 800,
+                          style: StyleUtils.style16Bold
+                              .copyWith(color: ColorUtils.primaryColor)),
+                      SizedBox(
+                        width: 800.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'VDTC 4QNZY8',
-                              style: StyleUtils.style18Bold.copyWith(color: Colors.black),
+                              style: StyleUtils.style18Bold
+                                  .copyWith(color: Colors.black),
                             ),
                             Container(
-                              width: 130,
-                              decoration: BoxDecoration(
+                              width: 130.w,
+                              decoration: const BoxDecoration(
                                 color: ColorUtils.primaryColor,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
                               ),
                               child: Row(
                                 children: [
-                                  IconButton(onPressed: () {}, icon: Icon(Icons.copy)),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.copy)),
                                   Text(
                                     'Sao chép',
-                                    style: StyleUtils.style16Normal.copyWith(color: ColorUtils.blackColor),
+                                    style: StyleUtils.style16Normal
+                                        .copyWith(color: ColorUtils.blackColor),
                                   )
                                 ],
                               ),
@@ -107,38 +118,48 @@ class PurchaseScreen extends BaseView<PurchaseController> {
                           ],
                         ),
                       ),
-                      Divider(),
+                      const Divider(),
                       Text(
                         'Chú ý: ',
-                        style: StyleUtils.style18Bold.copyWith(color: ColorUtils.redColor),
+                        style: StyleUtils.style18Bold
+                            .copyWith(color: ColorUtils.redColor),
                       ),
                       Text(
                         '- Nhập đúng nội dung chuyển tiền, chúng tôi không chịu trách nhiệm với câc trường hợp'
                         ' sai',
-                        style: StyleUtils.style16Bold.copyWith(color: ColorUtils.redColor),
+                        style: StyleUtils.style16Bold
+                            .copyWith(color: ColorUtils.redColor),
                       ),
-                      Text("- Giao dịch chuyển tiền phải có nội dung là \'VDTC 4QNZY8'",
-                          style: StyleUtils.style16Bold.copyWith(color: ColorUtils.redColor)),
+                      Text(
+                          "- Giao dịch chuyển tiền phải có nội dung là 'VDTC 4QNZY8'",
+                          style: StyleUtils.style16Bold
+                              .copyWith(color: ColorUtils.redColor)),
                       Text(
                           'Tuyệt đối không nhắn tin nội dung chuyển tiền vào số điện thoại và trong mục tin nhắn'
                           ' của app Momo',
-                          style: StyleUtils.style16Bold.copyWith(color: ColorUtils.redColor)),
+                          style: StyleUtils.style16Bold
+                              .copyWith(color: ColorUtils.redColor)),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text('Tài khoản nhận tiền',
-                            style: StyleUtils.style18Bold.copyWith(color: ColorUtils.primaryColor)),
+                            style: StyleUtils.style18Bold
+                                .copyWith(color: ColorUtils.primaryColor)),
                       ),
                       Text('0916271000',
-                          style: StyleUtils.style18Bold.copyWith(color: ColorUtils.blackColor, fontSize: 20)),
+                          style: StyleUtils.style18Bold.copyWith(
+                              color: ColorUtils.blackColor, fontSize: 20)),
                       Text('Nguyễn Thị Thanh Tâm',
-                          style: StyleUtils.style18Bold.copyWith(color: ColorUtils.blackColor, fontSize: 20)),
+                          style: StyleUtils.style18Bold.copyWith(
+                              color: ColorUtils.blackColor, fontSize: 20)),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text('Số tiền cần chuyển',
-                            style: StyleUtils.style18Bold.copyWith(color: ColorUtils.primaryColor, fontSize: 20)),
+                            style: StyleUtils.style18Bold.copyWith(
+                                color: ColorUtils.primaryColor, fontSize: 20)),
                       ),
                       Text('110.000đ( Đã bao gồm 10% VAT',
-                          style: StyleUtils.style18Bold.copyWith(color: ColorUtils.blackColor, fontSize: 20)),
+                          style: StyleUtils.style18Bold.copyWith(
+                              color: ColorUtils.blackColor, fontSize: 20)),
                     ],
                   )
                 ],
@@ -152,10 +173,11 @@ class PurchaseScreen extends BaseView<PurchaseController> {
 }
 
 class CardItem extends StatelessWidget {
-  Widget? icon;
-  String? text;
-  VoidCallback? onTap;
-  CardItem({Key? key, this.text, this.icon, this.onTap}) : super(key: key);
+  final Widget? icon;
+  final String? text;
+  final VoidCallback? onTap;
+  const CardItem({Key? key, this.text, this.icon, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -175,14 +197,15 @@ class CardItem extends StatelessWidget {
               icon ?? Assets.svgs.submiTax.svg(color: ColorUtils.whiteColor),
               Text(
                 text ?? 'Ví momo',
-                style: StyleUtils.style16Bold.copyWith(color: ColorUtils.whiteColor),
+                style: StyleUtils.style16Bold
+                    .copyWith(color: ColorUtils.whiteColor),
               ),
             ],
           ),
           decoration: BoxDecoration(
             color: ColorUtils.primaryColor,
             border: Border.all(color: ColorUtils.primaryColor),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
@@ -192,7 +215,7 @@ class CardItem extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
           ),
