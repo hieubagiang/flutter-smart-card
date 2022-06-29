@@ -88,15 +88,21 @@ class ProfileScreen extends BaseView<ProfileController> {
                       SizedBox(height: 8.h),
                       GestureDetector(
                         onTap: controller.selectBirthday,
-                        child: CustomTextField(
-                          title: 'Ngày sinh'.tr,
-                          titleStyle: StyleUtils.style18Normal
-                              .copyWith(color: Colors.black),
-                          isEnable: false,
-                          padding: EdgeInsets.symmetric(
-                              vertical: 16.h, horizontal: 16.w),
-                          controller: controller.birthDayTextCtrl,
-                        ),
+                        child: Obx(() {
+                          return CustomTextField(
+                            title: 'Ngày sinh'.tr,
+                            titleStyle: StyleUtils.style18Normal
+                                .copyWith(color: Colors.black),
+                            isEnable: false,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.h, horizontal: 16.w),
+                            hintText: DateTimeUtils.getStringDate(
+                                    controller.birthDay.value,
+                                    pattern: Pattern.ddMMyyyy_vi) ??
+                                '',
+                            hintTextColor: Colors.black,
+                          );
+                        }),
                       ),
                       SizedBox(height: 8.h),
                       Row(
@@ -185,10 +191,13 @@ class ProfileScreen extends BaseView<ProfileController> {
                         title: 'Ngày cấp'.tr,
                         titleStyle: StyleUtils.style18Normal
                             .copyWith(color: Colors.black),
-                        controller: controller.releaseDateTextCtrl,
                         isEnable: false,
                         padding: EdgeInsets.symmetric(
                             vertical: 16.h, horizontal: 16.w),
+                        hintTextColor: Colors.black,
+                        hintText: DateTimeUtils.getStringDate(
+                            controller.currentUser.value?.releaseDate,
+                            pattern: Pattern.ddMMyyyy_vi),
                       ),
                       SizedBox(height: 8.h),
                       CustomTextField(
@@ -199,6 +208,10 @@ class ProfileScreen extends BaseView<ProfileController> {
                         controller: controller.expireDateTextCtrl,
                         padding: EdgeInsets.symmetric(
                             vertical: 16.h, horizontal: 16.w),
+                        hintTextColor: Colors.black,
+                        hintText: DateTimeUtils.getStringDate(
+                            controller.currentUser.value?.expiredDate,
+                            pattern: Pattern.ddMMyyyy_vi),
                       ),
                       SizedBox(height: 8.h),
                       SizedBox(

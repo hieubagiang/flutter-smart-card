@@ -7,20 +7,27 @@ import '../../data/models/apdu_response.dart';
 
 class SmartCardConstant {
   static List<int> selectCmd = [0x00, 0xA4, 0x04, 0x00];
-  static List<int> appletID = [0x11, 0x22, 0x33, 0x44, 0x55, 0x00];
+  static List<int> appletID = [0x88, 0x88, 0x88, 0x88, 0x88, 0x00];
 
   static List<int> connect() => [...selectCmd, appletID.length, ...appletID];
-  static int walletCla = 0xB0;
-  static int verify = 0x20;
+  static int walletCla = 0x00;
+
+  static int signUpCard = 0x01;
+  static int insGetCardData = 0x02;
+
+  static int changePass = 0x10;
+  static int verify = 0x11;
+  static int unblock = 0x12;
+  static int passwordTryLimit = 0x13;
+
+  static int getModulus = 0x20;
+  static int getExponent = 0x21;
+  static int signRsa = 0x22;
+
   static int credit = 0x30;
   static int debit = 0x40;
-  static int signUpCard = 0x50;
-  static int unblock = 0x60;
-  static int changePass = 0x70;
-  static int insGetCardData = 0x13;
+
   static int success = 0x90;
-  static int genRsa = 0xd3;
-  static int getPublicKey = 0xf0;
 
   // maximum balance
   static int maxBalance = 0x7FFF;
@@ -61,8 +68,9 @@ class SmartCardHelper {
   Future<bool> connectCard(List<int> appletId) async {
     this.appletId = appletId;
     bool isSuccess = false;
-    ctx = await Pcsc.establishContext(PcscSCope.user);
     try {
+      ctx = await Pcsc.establishContext(PcscSCope.user);
+
       List<String> readers = await Pcsc.listReaders(ctx!);
 
       if (readers.isEmpty) {

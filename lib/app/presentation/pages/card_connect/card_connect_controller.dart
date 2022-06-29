@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../../../../injector.dart';
@@ -13,7 +14,8 @@ class CardConnectController extends BaseController {
 
   var isFirst = true;
   RxBool isConnected = false.obs;
-
+  SmartCardHelper smartCardHelper = injector.get<SmartCardHelper>();
+  RSAPublicKey? publicKey;
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -22,8 +24,6 @@ class CardConnectController extends BaseController {
   @override
   Future<void> onReady() async {
     super.onReady();
-    // commonController.startLoading();
-    // onSubmitCardConnect();
   }
 
   @override

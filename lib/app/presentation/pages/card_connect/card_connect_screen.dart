@@ -38,28 +38,16 @@ class CardConnectScreen extends BaseView<CardConnectController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    if (controller.isConnected.isTrue)
-                      SizedBox(
-                        width: double.infinity,
-                        child: CustomButton(
-                          label: 'card_connect'.tr,
-                          onTap: controller.onSubmitCardConnect,
-                          labelstyle: StyleUtils.style18Normal
-                              .copyWith(color: Colors.white),
-                          bgColor: ColorUtils.primaryColor,
-                        ),
-                      )
-                    else
-                      SizedBox(
-                        width: double.infinity,
-                        child: CustomButton(
-                          label: 'card_connect'.tr,
-                          onTap: controller.onSubmitCardConnect,
-                          labelstyle: StyleUtils.style18Normal
-                              .copyWith(color: Colors.white),
-                          bgColor: ColorUtils.primaryColor,
-                        ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        label: 'card_connect'.tr,
+                        onTap: controller.onSubmitCardConnect,
+                        labelstyle: StyleUtils.style18Normal
+                            .copyWith(color: Colors.white),
+                        bgColor: ColorUtils.primaryColor,
                       ),
+                    ),
                   ],
                 ),
               ),

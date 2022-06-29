@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../common/utils/utils.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String hintText;
+  final TextEditingController? controller;
+  final String? hintText;
+  final Color? hintTextColor;
   final String title;
   final TextStyle? titleStyle;
   final bool isRequire;
@@ -14,8 +15,9 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? padding;
 
   const CustomTextField({
-    required this.controller,
-    this.hintText = '',
+    this.controller,
+    this.hintText,
+    this.hintTextColor,
     Key? key,
     required this.title,
     this.isRequire = false,
@@ -51,7 +53,7 @@ class CustomTextField extends StatelessWidget {
                 EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
             hintText: hintText,
             hintStyle: StyleUtils.style18Normal.copyWith(
-              color: ColorUtils.hintTextColor,
+              color: hintTextColor ?? ColorUtils.hintTextColor,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(2),
