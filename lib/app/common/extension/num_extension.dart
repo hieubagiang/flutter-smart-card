@@ -11,3 +11,11 @@ extension RandomOfDigits on Random {
     return (min + nextInt(max.toInt() - min.toInt())).toInt();
   }
 }
+
+extension IntExtension on int {
+  String toHex() {
+    return toRadixString(16);
+  }
+}
+
+extension BigIntExtension on BigInt {}

@@ -1,3 +1,5 @@
+import 'package:smart_card/app/common/extension/extensions.dart';
+
 class ApduCommand {
   final int cla, ins, p1, p2;
   final List<int>? data;
@@ -13,12 +15,29 @@ class ApduCommand {
       ApduCommand(cla: 0x00, ins: 0xA4, p1: 0x04, p2: 0x00, data: appletID);
 
   List<int> toListInt() {
-    return [
+    List<int> command = [
       cla,
       ins,
       p1,
       p2,
-      if (data != null) ...[data!.length, ...?data]
     ];
+    if (data != null) {
+      if (data!.length < 256) {
+        command.addAll([data!.length, ...?data]);
+      } else if (data!.length <= 65536) {
+        command.addAll([
+          ...data!.length
+              .toHex()
+              .formatHexLength(6)
+              .splitByLength(2)
+              .parseToListInt(),
+          ...?data
+        ]);
+      } else {
+        throw Exception(
+            "invalid_data_length: 0<=data.length<=65536, currrent datalength is ${data!.length}");
+      }
+    }
+    return command;
   }
 }

@@ -3,20 +3,20 @@ import 'package:smart_card/app/common/utils/date_time.dart';
 import '../gender_enum.dart';
 
 class UserModel {
-  final String cardId;
-  final String pin;
+  final String? cardId;
+  final String? pin;
   final String? avatarImage;
   final String? fingerPrintImage;
-  final String fullName;
-  final String address;
-  final String original;
-  final GenderType sex;
-  final String national;
-  final DateTime birthday;
-  final DateTime expiredDate;
-  final DateTime releaseDate;
-  final String personalIdentification;
-  final int amount;
+  final String? fullName;
+  final String? placeOfResidence;
+  final String? placeOfOrigin;
+  final GenderType? sex;
+  final String? nationality;
+  final DateTime? birthday;
+  final DateTime? expiredDate;
+  final DateTime? releaseDate;
+  final String? personalIdentification;
+  final int? amount;
 
   factory UserModel.fromRaw(String raw) {
     int i = 0;
@@ -27,10 +27,10 @@ class UserModel {
       // avatarImage: properties[i++],
       // fingerPrintImage: properties[i++],
       fullName: properties[i++],
-      address: properties[i++],
-      original: properties[i++],
+      placeOfResidence: properties[i++],
+      placeOfOrigin: properties[i++],
       sex: properties[i++] == '1' ? GenderType.male : GenderType.female,
-      national: properties[i++],
+      nationality: properties[i++],
       birthday: DateTimeUtils.getDateTime(properties[i++],
           pattern: Pattern.ddMMyyyy_vi),
       expiredDate: DateTimeUtils.getDateTime(properties[i++],
@@ -45,20 +45,20 @@ class UserModel {
 //<editor-fold desc="Data Methods">
 
   UserModel({
-    required this.cardId,
-    required this.pin,
+    this.cardId,
+    this.pin,
     this.avatarImage,
     this.fingerPrintImage,
-    required this.fullName,
-    required this.address,
-    required this.original,
-    required this.sex,
-    required this.national,
-    required this.birthday,
-    required this.expiredDate,
-    required this.releaseDate,
-    required this.personalIdentification,
-    required this.amount,
+    this.fullName,
+    this.placeOfResidence,
+    this.placeOfOrigin,
+    this.sex,
+    this.nationality,
+    this.birthday,
+    this.expiredDate,
+    this.releaseDate,
+    this.personalIdentification,
+    this.amount,
   });
 
   @override
@@ -71,10 +71,10 @@ class UserModel {
           avatarImage == other.avatarImage &&
           fingerPrintImage == other.fingerPrintImage &&
           fullName == other.fullName &&
-          address == other.address &&
-          original == other.original &&
+          placeOfResidence == other.placeOfResidence &&
+          placeOfOrigin == other.placeOfOrigin &&
           sex == other.sex &&
-          national == other.national &&
+          nationality == other.nationality &&
           birthday == other.birthday &&
           expiredDate == other.expiredDate &&
           releaseDate == other.releaseDate &&
@@ -88,10 +88,10 @@ class UserModel {
       avatarImage.hashCode ^
       fingerPrintImage.hashCode ^
       fullName.hashCode ^
-      address.hashCode ^
-      original.hashCode ^
+      placeOfResidence.hashCode ^
+      placeOfOrigin.hashCode ^
       sex.hashCode ^
-      national.hashCode ^
+      nationality.hashCode ^
       birthday.hashCode ^
       expiredDate.hashCode ^
       releaseDate.hashCode ^
@@ -106,10 +106,10 @@ class UserModel {
         ' avatarImage: $avatarImage,'
         ' fingerPrintImage: $fingerPrintImage,'
         ' fullName: $fullName,'
-        ' address: $address,'
-        ' original: $original,'
+        ' address: $placeOfResidence,'
+        ' original: $placeOfOrigin,'
         ' sex: $sex,'
-        ' national: $national,'
+        ' national: $nationality,'
         ' birthday: $birthday,'
         ' expiredDate: $expiredDate,'
         ' releaseDate: $releaseDate,'
@@ -124,10 +124,10 @@ class UserModel {
     String? avatarImage,
     String? fingerPrintImage,
     String? fullName,
-    String? address,
-    String? original,
+    String? placeOfResidence,
+    String? placeOfOrigin,
     GenderType? sex,
-    String? national,
+    String? nationality,
     DateTime? birthday,
     DateTime? expiredDate,
     DateTime? releaseDate,
@@ -141,10 +141,10 @@ class UserModel {
       avatarImage: avatarImage ?? this.avatarImage,
       fingerPrintImage: fingerPrintImage ?? this.fingerPrintImage,
       fullName: fullName ?? this.fullName,
-      address: address ?? this.address,
-      original: original ?? this.original,
+      placeOfResidence: placeOfResidence ?? this.placeOfResidence,
+      placeOfOrigin: placeOfOrigin ?? this.placeOfOrigin,
       sex: sex ?? this.sex,
-      national: national ?? this.national,
+      nationality: nationality ?? this.nationality,
       birthday: birthday ?? this.birthday,
       expiredDate: expiredDate ?? this.expiredDate,
       releaseDate: releaseDate ?? this.releaseDate,
@@ -161,10 +161,10 @@ class UserModel {
       'avatarImage': avatarImage,
       'fingerPrintImage': fingerPrintImage,
       'fullName': fullName,
-      'address': address,
-      'original': original,
+      'address': placeOfResidence,
+      'original': placeOfOrigin,
       'sex': sex,
-      'national': national,
+      'national': nationality,
       'birthday': birthday,
       'expiredDate': expiredDate,
       'releaseDate': releaseDate,
@@ -180,10 +180,10 @@ class UserModel {
       avatarImage: map['avatarImage'] as String,
       fingerPrintImage: map['fingerPrintImage'] as String,
       fullName: map['fullName'] as String,
-      address: map['address'] as String,
-      original: map['original'] as String,
+      placeOfResidence: map['address'] as String,
+      placeOfOrigin: map['original'] as String,
       sex: map['sex'] as GenderType,
-      national: map['national'] as String,
+      nationality: map['national'] as String,
       birthday: map['birthday'] as DateTime,
       expiredDate: map['expiredDate'] as DateTime,
       releaseDate: map['releaseDate'] as DateTime,
@@ -193,23 +193,23 @@ class UserModel {
   }
 
   String simplify() =>
-      cardId +
+      cardId! +
       "\$" +
-      pin + /*
+      pin! +
       "\$" +
       (avatarImage ?? '') +
       "\$" +
-      (fingerPrintImage ?? '') +*/
+      (fingerPrintImage ?? '') +
       "\$" +
-      fullName +
+      fullName! +
       "\$" +
-      address +
+      placeOfResidence! +
       "\$" +
-      original +
+      placeOfOrigin! +
       "\$" +
-      '${sex.id}' +
+      '${sex?.id}' +
       "\$" +
-      national +
+      nationality! +
       "\$" +
       '${DateTimeUtils.getStringDate(birthday, pattern: Pattern.ddMMyyyy_vi)}' +
       "\$" +
@@ -217,7 +217,7 @@ class UserModel {
       "\$" +
       '${DateTimeUtils.getStringDate(releaseDate, pattern: Pattern.ddMMyyyy_vi)}' +
       "\$" +
-      personalIdentification +
+      personalIdentification! +
       "\$" +
       '$amount';
 //</editor-fold>

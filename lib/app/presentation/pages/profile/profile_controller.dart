@@ -22,8 +22,6 @@ class ProfileController extends BaseController {
       TextEditingController(text: '1'.padLeft(9, '0'));
   TextEditingController fullNameTextCtrl =
       TextEditingController(text: 'Phạm Doãn Hiếu');
-  TextEditingController birthDayTextCtrl = TextEditingController();
-  TextEditingController sexTextCtrl = TextEditingController();
   TextEditingController nationalityTextCtrl =
       TextEditingController(text: 'Việt Nam');
   TextEditingController placeOfOriginTextCtrl =
@@ -39,22 +37,25 @@ class ProfileController extends BaseController {
       text: DateTimeUtils.getStringDate(
           DateTime.now().add(const Duration(days: 365 * 5)),
           pattern: Pattern.ddMMyyyy_vi));
-  Rx<DateTime?> selectedDate = Rx(null);
+  Rx<DateTime?> birthDay = Rx(null);
   Rx<GenderType> selectedGender = Rx(GenderType.male);
   bool verifyCardResult = true; //Mock Verify card
   SmartCardHelper smartCardHelper = injector.get<SmartCardHelper>();
   Rx<File?> selectAvatarFile = Rx(null);
   Rx<File?> selectFingerprintFile = Rx(null);
-
+  Rx<UserModel?> currentUser = Rx(null);
   @override
   Future<void> onInit() async {
     super.onInit();
-    getCardInfo();
   }
 
   @override
   Future<void> onReady() async {
     super.onReady();
+    currentUser.value = await getCardInfo() ?? UserModel();
+    if (currentUser.value != null) {
+      _setModelToView(currentUser.value!);
+    }
     // commonController.startLoading();
   }
 
@@ -84,19 +85,21 @@ class ProfileController extends BaseController {
     final user = UserModel(
         cardId: cardIdTextCtrl.text,
         pin: '1234',
-        avatarImage: selectAvatarFile.value!.path,
-        fingerPrintImage: selectFingerprintFile.value!.path,
+        avatarImage: FileUtils.base64EncodeFormat(
+            selectAvatarFile.value!.readAsBytesSync()),
+        fingerPrintImage: FileUtils.base64EncodeFormat(
+            selectAvatarFile.value!.readAsBytesSync()),
         fullName: fullNameTextCtrl.text,
-        address: placeOfResidenceTextCtrl.text,
+        placeOfResidence: placeOfResidenceTextCtrl.text,
         sex: selectedGender.value,
-        national: nationalityTextCtrl.text,
-        birthday: selectedDate.value!,
+        nationality: nationalityTextCtrl.text,
+        birthday: birthDay.value!,
         expiredDate: DateTimeUtils.getDateTime(expireDateTextCtrl.text,
             pattern: Pattern.ddMMyyyy_vi),
         releaseDate: DateTimeUtils.getDateTime(releaseDateTextCtrl.text,
             pattern: Pattern.ddMMyyyy_vi),
         personalIdentification: personalIdentificationTextCtrl.text,
-        original: placeOfOriginTextCtrl.text,
+        placeOfOrigin: placeOfOriginTextCtrl.text,
         amount: 0);
     List<int> data = utf8.encode(user.simplify());
     final verify = await smartCardHelper.sendApdu(ApduCommand(
@@ -119,16 +122,14 @@ class ProfileController extends BaseController {
 
   Future<void> selectBirthday() async {
     final date = await FunctionUtils.selectDate(Get.context!);
-    selectedDate.value = date;
-    birthDayTextCtrl.text =
-        DateTimeUtils.getStringDate(date, pattern: Pattern.ddMMyyyy_vi) ?? '';
+    currentUser.value = currentUser.value?.copyWith(birthday: date);
   }
 
   void onChangeGender(int? value) {
     selectedGender.value = GenderType.values[value ?? 0];
   }
 
-  Future<void> getCardInfo() async {
+  Future<UserModel?> getCardInfo() async {
     final res = await smartCardHelper.sendApdu(ApduCommand(
         cla: SmartCardConstant.walletCla,
         ins: SmartCardConstant.insGetCardData,
@@ -138,11 +139,24 @@ class ProfileController extends BaseController {
       injector.get<LogUtils>().logI('Create profile successful');
       Get.snackbar('', 'Create profile successful'.tr,
           colorText: Colors.white, backgroundColor: Colors.green[400]);
-      /*final model =*/ UserModel.fromRaw(utf8.decode(res!.sn));
+      return UserModel.fromRaw(utf8.decode(res!.sn));
+      // ();
     } else {
       injector.get<LogUtils>().logI('failed');
       Get.snackbar('', 'failed_message'.tr,
           colorText: Colors.white, backgroundColor: Colors.red[400]);
     }
+    return null;
+  }
+
+  void _setModelToView(UserModel currentUser) {
+    cardIdTextCtrl.text = currentUser.cardId ?? '';
+    fullNameTextCtrl.text = currentUser.fullName ?? '';
+    birthDay.value = currentUser.birthday;
+    nationalityTextCtrl.text = currentUser.nationality ?? '';
+    placeOfOriginTextCtrl.text = currentUser.placeOfOrigin ?? '';
+    placeOfResidenceTextCtrl.text = currentUser.placeOfResidence ?? '';
+    placeOfOriginTextCtrl.text = currentUser.placeOfOrigin ?? '';
+    selectedGender.value = currentUser.sex ?? GenderType.male;
   }
 }
