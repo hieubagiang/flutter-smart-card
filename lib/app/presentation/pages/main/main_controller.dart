@@ -7,8 +7,7 @@ import '../../../../injector.dart';
 import '../../../common/base/base_controller.dart';
 import '../../../common/helper/smart_card_helper.dart';
 
-class MainController extends BaseController
-    with GetSingleTickerProviderStateMixin {
+class MainController extends BaseController with GetSingleTickerProviderStateMixin {
   // static final MainController _singleton = MainController._internal();
   late TabController tabController;
 
@@ -31,7 +30,7 @@ class MainController extends BaseController
   @override
   Future<void> onInit() async {
     super.onInit();
-    tabController = TabController(vsync: this, length: 2, initialIndex: 0)
+    tabController = TabController(vsync: this, length: 4, initialIndex: 0)
       ..addListener(() {
         onChangeTab(tabController.index);
       });

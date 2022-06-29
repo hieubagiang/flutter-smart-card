@@ -11,4 +11,9 @@ final Map<String, String> viVn = {
   'profile': 'Hồ sơ',
   'change_pin': 'Đổi mã pin',
   'sign_in': 'Đăng ký',
+  'tax': 'Thuế',
+  'purchase': 'Nạp tiền',
+  'current_pin': 'Mã Pin hiện tại',
+  'new_pin': 'Mã Pin mới',
+  'confirm_new_pin': 'Xác nhận mã Pin mới'
 };

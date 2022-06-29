@@ -34,16 +34,22 @@ class $AssetsSvgsGen {
   SvgGenImage get icCamera => const SvgGenImage('assets/svgs/ic_camera.svg');
 
   /// File path: assets/svgs/ic_finger_print.svg
-  SvgGenImage get icFingerPrint =>
-      const SvgGenImage('assets/svgs/ic_finger_print.svg');
+  SvgGenImage get icFingerPrint => const SvgGenImage('assets/svgs/ic_finger_print.svg');
 
   /// File path: assets/svgs/ic_fingerprint.svg
-  SvgGenImage get icFingerprint =>
-      const SvgGenImage('assets/svgs/ic_fingerprint.svg');
+  SvgGenImage get icFingerprint => const SvgGenImage('assets/svgs/ic_fingerprint.svg');
 
   /// File path: assets/svgs/side_menu_logo.svg
-  SvgGenImage get sideMenuLogo =>
-      const SvgGenImage('assets/svgs/side_menu_logo.svg');
+  SvgGenImage get sideMenuLogo => const SvgGenImage('assets/svgs/side_menu_logo.svg');
+
+  /// File path: assets/svgs/side_menu_logo.svg
+  SvgGenImage get submiTax => const SvgGenImage('assets/svgs/ic_nopthuecn.svg');
+
+  /// File path: assets/svgs/side_menu_logo.svg
+  SvgGenImage get registerTax => const SvgGenImage('assets/svgs/ic_dkthue.svg');
+
+  /// File path: assets/svgs/side_menu_logo.svg
+  SvgGenImage get elumerTax => const SvgGenImage('assets/svgs/ic_kekhaithuecn.svg');
 }
 
 class Assets {

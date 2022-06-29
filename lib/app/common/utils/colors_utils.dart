@@ -5,6 +5,7 @@ class ColorUtils {
   static const Color primaryColor = Color(0xffCE7A58);
   static const Color primaryColor2 = Color(0xffE94057);
   static const Color lightPrimaryColor = Color(0xfff57674);
+  static const Color taxItemColor = Color(0xfff8ebe6);
 
   // static const Color logoThirdColor = Color.fromRGBO(233, 64, 87, 1);
   static const Color logoThirdColor = Color(0xffE94057);
@@ -41,6 +42,7 @@ class ColorUtils {
   static const Color facebookColor = Color(0xff3b5998);
   static const Color premiumColor = Color.fromRGBO(227, 164, 65, 1);
   static const Color borderColor = Color(0xffC9CDCF);
+  static const Color iconTaxColor = Color(0xffce7a58);
 }
 
 class OpacityUtils {
