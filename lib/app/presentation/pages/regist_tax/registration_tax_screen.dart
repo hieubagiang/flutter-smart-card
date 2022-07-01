@@ -80,13 +80,38 @@ class RegistrationTaxScreen extends BaseView<RegistrationTaxController> {
                             vertical: 16.h, horizontal: 16.w),
                       ),
                       SizedBox(height: 8.h),
+                      Row(
+                        children: [
+                          Text(
+                            'Tự động thanh toán: ',
+                            style: StyleUtils.style18Normal
+                                .copyWith(color: Colors.black),
+                          ),
+                          SizedBox(width: 8.w),
+                          Obx(() {
+                            return Switch(
+                              value: controller.user.value?.autoPay ?? false,
+                              activeColor: ColorUtils.primaryColor,
+                              onChanged: (value) {
+                                controller.user.value =
+                                    controller.user.value?.copyWith(
+                                  autoPay: value,
+                                );
+                              },
+                            );
+                          }),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
                       SizedBox(
                         height: 16.h,
                       ),
                       SizedBox(
                         width: 0.1.sw,
                         child: CustomButton(
-                          label: 'sign_in'.tr,
+                          label: 'Cập nhật'.tr,
                           onTap: controller.onSubmitRegistTax,
                           labelstyle: StyleUtils.style18Normal
                               .copyWith(color: Colors.white),

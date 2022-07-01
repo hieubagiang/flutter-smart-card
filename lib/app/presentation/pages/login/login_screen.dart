@@ -67,37 +67,6 @@ class LoginScreen extends BaseView<LoginController> {
                                     color: ColorUtils.primaryTextColor),
                               )),
                         ),
-                        Expanded(
-                          child: TextButton(
-                              onPressed: () {
-                                // controller.sign();
-                              },
-                              child: Text(
-                                'test sign'.tr,
-                                style: StyleUtils.style18Normal.copyWith(
-                                    color: ColorUtils.primaryTextColor),
-                              )),
-                        ),
-                        Expanded(
-                          child: TextButton(
-                              onPressed: () {
-                                // controller();
-                              },
-                              child: Text(
-                                'Tesst'.tr,
-                                style: StyleUtils.style18Normal.copyWith(
-                                    color: ColorUtils.primaryTextColor),
-                              )),
-                        ),
-                        Expanded(
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'register'.tr,
-                                style: StyleUtils.style18Normal.copyWith(
-                                    color: ColorUtils.primaryTextColor),
-                              )),
-                        ),
                       ],
                     ),
                     SizedBox(

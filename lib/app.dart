@@ -4,6 +4,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 
 import 'app/common/utils/utils.dart';
+import 'app/presentation/app_biding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/translations/app_translations.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         builder: (contex, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
+            initialBinding: AppBindings(),
             getPages: AppPages.pages,
             translations: MyTranslations(),
             defaultTransition: Transition.upToDown,
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate, // Here !
               DefaultWidgetsLocalizations.delegate,
             ],
-            initialRoute: RouteList.main,
+            initialRoute: RouteList.connectCard,
 
             /*
               FirebaseAuth.instance.currentUser == null

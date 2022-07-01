@@ -23,13 +23,13 @@ class CustomMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 15.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          color: selected ? Colors.white : ColorUtils.primaryColor),
-      child: InkWell(
-        onTap: onTap,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 15.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            color: selected ? Colors.white : ColorUtils.primaryColor),
         child: Row(
           children: [
             iconWidget ??

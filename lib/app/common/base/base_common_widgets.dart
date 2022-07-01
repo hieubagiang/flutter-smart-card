@@ -47,7 +47,7 @@ class BaseCommonWidgets implements _CommonWidgetsInterface {
   //EXAMPLE
   @override
   void showDialogMessage(
-      {required String message, Function()? onClick, String? title}) {
+      {required String message, Function()? onPress, String? title}) {
     if (message.isEmpty) return;
     hideDialog();
     // set up the button
@@ -60,8 +60,8 @@ class BaseCommonWidgets implements _CommonWidgetsInterface {
         ),
         onPressed: () {
           Get.back();
-          if (onClick != null) {
-            onClick();
+          if (onPress != null) {
+            onPress();
           }
         },
       ),
@@ -169,7 +169,7 @@ abstract class _CommonWidgetsInterface {
   void hideDialog();
 
   void showDialogMessage(
-      {String? title, required String message, Function()? onClick});
+      {String? title, required String message, Function()? onPress});
 
   void showConfirmDialog(
       {String? title, String? message, Function()? onConfirm});

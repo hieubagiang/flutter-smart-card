@@ -45,8 +45,8 @@ class CardConnectController extends BaseController {
       Get.toNamed(RouteList.signIn);
     } else {
       SmartDialog.show(builder: (context) {
-        return ErrorDialog(
-          errorMessage: 'connect_card_failed_message'.tr,
+        return CustomAlertDialog(
+          content: 'connect_card_failed_message'.tr,
         );
       });
     }

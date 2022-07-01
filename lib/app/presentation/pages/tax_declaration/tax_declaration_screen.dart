@@ -61,20 +61,38 @@ class TaxDeclarationScreen extends BaseView<TaxDeclarationController> {
                       ),
                       SizedBox(height: 8.h),
                       CustomTextField(
-                        title: 'Thu nhập chịu thuế'.tr,
+                        title: 'Tổng thu nhập'.tr,
                         titleStyle: StyleUtils.style18Normal
                             .copyWith(color: Colors.black),
                         controller: controller.incomeTextCtrl,
-                        isEnable: false,
                         padding: EdgeInsets.symmetric(
                             vertical: 16.h, horizontal: 16.w),
                       ),
                       SizedBox(height: 8.h),
                       CustomTextField(
-                        title: 'Giảm trừ gia cảnh'.tr,
+                        title: 'Giảm trừ gia cảnh (số người phụ thuộc)'.tr,
                         titleStyle: StyleUtils.style18Normal
                             .copyWith(color: Colors.black),
-                        controller: controller.placeOfResidenceTextCtrl,
+                        controller: controller.deductionTextCtrl,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.h, horizontal: 16.w),
+                      ),
+                      CustomTextField(
+                        title:
+                            'Bảo hiểm xã hội, bảo hiểm y tế, bảo hiểm thất nghiệp'
+                                .tr,
+                        titleStyle: StyleUtils.style18Normal
+                            .copyWith(color: Colors.black),
+                        controller: controller.insuranceDeduction,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.h, horizontal: 16.w),
+                      ),
+                      SizedBox(height: 8.h),
+                      CustomTextField(
+                        title: 'Tổng thuế phải trả'.tr,
+                        titleStyle: StyleUtils.style18Normal
+                            .copyWith(color: Colors.black),
+                        controller: controller.totalTaxTextCtrl,
                         isEnable: false,
                         padding: EdgeInsets.symmetric(
                             vertical: 16.h, horizontal: 16.w),
@@ -87,7 +105,7 @@ class TaxDeclarationScreen extends BaseView<TaxDeclarationController> {
                         width: 0.1.sw,
                         child: CustomButton(
                           label: 'sign_in'.tr,
-                          onTap: controller.onSubmitRegistTax,
+                          onTap: controller.onSubmitDeclare,
                           labelstyle: StyleUtils.style18Normal
                               .copyWith(color: Colors.white),
                           bgColor: ColorUtils.primaryColor,

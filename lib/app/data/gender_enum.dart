@@ -27,9 +27,9 @@ extension GenderTypeEnumExtension on GenderType {
   int get id {
     switch (this) {
       case GenderType.male:
-        return 1;
+        return 0;
       case GenderType.female:
-        return 2;
+        return 1;
     }
   }
 

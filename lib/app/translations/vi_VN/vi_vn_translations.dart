@@ -15,5 +15,6 @@ final Map<String, String> viVn = {
   'purchase': 'Nạp tiền',
   'current_pin': 'Mã Pin hiện tại',
   'new_pin': 'Mã Pin mới',
-  'confirm_new_pin': 'Nhập lại mã pin mới'
+  'confirm_new_pin': 'Nhập lại mã pin mới',
+  'update': 'Cập nhật'
 };

@@ -7,13 +7,14 @@ import '../../data/models/apdu_response.dart';
 
 class SmartCardConstant {
   static List<int> selectCmd = [0x00, 0xA4, 0x04, 0x00];
-  static List<int> appletID = [0x88, 0x88, 0x88, 0x88, 0x88, 0x00];
+  static List<int> appletID = [0x11, 0x22, 0x33, 0x44, 0x55, 0x00];
 
   static List<int> connect() => [...selectCmd, appletID.length, ...appletID];
   static int walletCla = 0x00;
 
   static int signUpCard = 0x01;
   static int insGetCardData = 0x02;
+  static int isInitData = 0x03;
 
   static int changePass = 0x10;
   static int verify = 0x11;
@@ -97,6 +98,9 @@ class SmartCardHelper {
       }
     } catch (e) {
       injector.get<LogUtils>().logE('Card returned an error: $e');
+      if (e.toString().contains('SCARD_W_REMOVED_CARD')) {
+        await connectCard(SmartCardConstant.appletID);
+      }
     }
     return isSuccess;
   }

@@ -27,13 +27,18 @@ class FunctionUtils {
   }
 
   ///Convert String to Date
-  static String stringToDateFormat({dynamic value, String? format, String? locale}) {
+  static String stringToDateFormat(
+      {dynamic value, String? format, String? locale}) {
     if (value == null || value.toString().isEmpty) return "";
     String dateString;
     if (locale != null) {
-      dateString = DateFormat(format, locale).format(DateTime.parse(value.toString())).toString();
+      dateString = DateFormat(format, locale)
+          .format(DateTime.parse(value.toString()))
+          .toString();
     } else {
-      dateString = DateFormat(format).format(DateTime.parse(value.toString())).toString();
+      dateString = DateFormat(format)
+          .format(DateTime.parse(value.toString()))
+          .toString();
     }
     return dateString;
   }
@@ -59,7 +64,12 @@ class FunctionUtils {
   }
 
   static String convertFullNameToAvatarText(String? name) {
-    final convertName = name?.trim().split(' ').map((e) => e.isNotEmpty ? e.substring(0, 1) : '').toList() ?? [];
+    final convertName = name
+            ?.trim()
+            .split(' ')
+            .map((e) => e.isNotEmpty ? e.substring(0, 1) : '')
+            .toList() ??
+        [];
     if (convertName.length > 2) {
       return '${convertName.first}${convertName.last}'.toUpperCase();
     } else {
@@ -67,7 +77,8 @@ class FunctionUtils {
     }
   }
 
-  static Future<void> showToast(String message, {Color? backgroundColor, Color? textColor}) async {
+  static Future<void> showToast(String message,
+      {Color? backgroundColor, Color? textColor}) async {
     await Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
@@ -78,7 +89,8 @@ class FunctionUtils {
         fontSize: FontSizeUtils.toastFontSize);
   }
 
-  static void showSnackBar(String title, String message, {Color? backgroundColor, Color? colorText}) {
+  static void showSnackBar(String title, String message,
+      {Color? backgroundColor, Color? colorText}) {
     Get.snackbar(title, message,
         backgroundColor: backgroundColor ?? ColorUtils.whiteColor,
         colorText: colorText ?? ColorUtils.blackColor,
@@ -100,7 +112,9 @@ class FunctionUtils {
   }
 
   static Future<dynamic> showDialogCustom(
-      {required BuildContext context, Function(dynamic)? afterClose, required Widget dialog}) async {
+      {required BuildContext context,
+      Function(dynamic)? afterClose,
+      required Widget dialog}) async {
     final result = await showDialog(
       barrierDismissible: false,
       context: context,
@@ -123,11 +137,14 @@ class FunctionUtils {
     return timer;
   }
 
-  static StreamTransformer transformer<T>(T Function(Map<String, dynamic> json) fromJson) =>
+  static StreamTransformer transformer<T>(
+          T Function(Map<String, dynamic> json) fromJson) =>
       StreamTransformer<dynamic, List<T>>.fromHandlers(
         handleData: (dynamic data, EventSink<List<T>> sink) {
           final snaps = data.docs.map((doc) => doc.data()).toList();
-          final model = snaps.map((json) => fromJson(json as Map<String, dynamic>)).toList();
+          final model = snaps
+              .map((json) => fromJson(json as Map<String, dynamic>))
+              .toList();
           sink.add(model);
         },
       );
@@ -201,7 +218,7 @@ class FunctionUtils {
   String randomString(int length) {
     var rand = math.Random();
     var codeUnits = List.generate(length, (index) {
-      return rand.nextInt(33) + 89;
+      return rand.nextInt(26) + 65;
     });
     return String.fromCharCodes(codeUnits);
   }

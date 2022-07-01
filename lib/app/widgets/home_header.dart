@@ -1,17 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_card/app/common/utils/utils.dart';
-import 'package:smart_card/app/widgets/user_avatar.dart';
+import 'package:smart_card/app/widgets/custom_avatar.dart';
 
 import 'custom_button.dart';
 
 class HomeHeader extends StatelessWidget {
   final String userName;
-  final String userRole;
+  final String amount;
   final String? avatar;
   final VoidCallback onLogout;
+
   const HomeHeader({
     required this.userName,
-    required this.userRole,
+    required this.amount,
     this.avatar,
     required this.onLogout,
     Key? key,
@@ -24,36 +26,50 @@ class HomeHeader extends StatelessWidget {
       children: [
         Row(
           children: [
-            UserAvatar(avatar: avatar),
+            avatar != null
+                ? CustomAvatar(sizeAvatar: 48.w, memoryImage: avatar!)
+                : const CupertinoActivityIndicator(),
             const SizedBox(width: 16.0),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'Xin chào, ',
-                    style: TextStyle(
-                        fontSize: 16.sp, color: ColorUtils.primaryTextColor),
-                    children: [
-                      TextSpan(
-                        text: userName,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.sp,
-                          color: ColorUtils.primaryTextColor,
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Xin chào, ',
+                      style: TextStyle(fontSize: 18.sp, color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: userName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.sp,
+                            color: ColorUtils.primaryTextColor,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                /*Text(
-                  userRole,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: ColorUtils.hintTextColor,
-                    height: 1.42,
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Số dư: ',
+                      style: TextStyle(
+                          fontSize: 18.sp, color: ColorUtils.hintTextColor),
+                      children: [
+                        TextSpan(
+                          text: amount,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: ColorUtils.primaryTextColor,
+                            height: 1.42,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),*/
+                ),
               ],
             ),
           ],

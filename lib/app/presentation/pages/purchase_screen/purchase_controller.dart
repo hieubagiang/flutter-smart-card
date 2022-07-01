@@ -1,3 +1,8 @@
-import '../../../common/base/base_controller.dart';
+import 'package:smart_card/app/presentation/pages/main/main_controller.dart';
 
-class PurchaseController extends BaseController {}
+import '../../../common/base/base_controller.dart';
+import '../../../data/models/user_model.dart';
+
+class PurchaseController extends BaseController {
+  Rx<UserModel?> currentUser = Get.find<MainController>().user;
+}
