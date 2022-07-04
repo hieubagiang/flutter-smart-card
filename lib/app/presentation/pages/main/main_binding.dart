@@ -4,6 +4,8 @@ import 'package:smart_card/app/presentation/pages/tax_transaction/tax_controller
 
 import '../profile/profile_controller.dart';
 import '../purchase_screen/purchase_controller.dart';
+import '../regist_tax/registration_tax_controller.dart';
+import '../tax_declaration/tax_declaration_controller.dart';
 import 'main_controller.dart';
 
 class MainBinding extends Bindings {
@@ -14,5 +16,7 @@ class MainBinding extends Bindings {
     Get.put(ProfileController());
     Get.put(TaxController());
     Get.put(PurchaseController());
+    Get.put(RegistrationTaxController());
+    Get.put(TaxDeclarationController());
   }
 }

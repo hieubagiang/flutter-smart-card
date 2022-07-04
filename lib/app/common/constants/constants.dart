@@ -24,7 +24,8 @@ class ApiConstant {
   static const int responseTimeout = 30000;
   static const String contentType = 'application/json; charset=utf-8';
   static const String authentication = 'Authorization';
-  static String host = '';
+  static String baseUrl = 'http://54.186.242.141:3002/api';
+  static String baseImageUrl = 'http://54.186.242.141:3002/api/files/';
 }
 
 class KeyArgument {}

@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../common/utils/colors_utils.dart';
 
-class MenuItem extends StatelessWidget {
+class CustomMenuItem extends StatelessWidget {
   final VoidCallback onTap;
   final String? icon;
   final String label;
   final bool selected;
   final Widget? iconWidget;
-  const MenuItem({
+  const CustomMenuItem({
     required this.onTap,
     this.icon,
     this.label = 'Label',
@@ -23,13 +23,13 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 15.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          color: selected ? Colors.white : ColorUtils.primaryColor),
-      child: InkWell(
-        onTap: onTap,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 15.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            color: selected ? Colors.white : ColorUtils.primaryColor),
         child: Row(
           children: [
             iconWidget ??

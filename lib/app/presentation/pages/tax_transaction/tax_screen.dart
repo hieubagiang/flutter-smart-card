@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:smart_card/app/common/base/base_view_view_model.dart';
 import 'package:smart_card/app/common/utils/colors_utils.dart';
+import 'package:smart_card/app/presentation/pages/regist_tax/registration_tax_screen.dart';
 import 'package:smart_card/app/presentation/pages/tax_transaction/tax_controller.dart';
 import 'package:smart_card/app/presentation/pages/tax_transaction/widgets/register_tax.dart';
 import 'package:smart_card/gen/assets.gen.dart';
 
-import '../../../common/utils/layout_utils.dart';
 import '../../../common/utils/styles.dart';
+import '../tax_declaration/tax_declaration_screen.dart';
 
 enum SingingCharacter { thanhtoan }
 
@@ -32,19 +33,18 @@ class TaxScreen extends BaseView<TaxController> {
                       onTap: () {
                         controller.tabController.animateTo(0);
                       },
-                      description: 'Kê khai thuế',
-                      svgImage: Assets.svgs.elumerTax
-                          .svg(color: ColorUtils.iconTaxColor),
+                      description: 'Đăng kí thuế',
+                      svgImage: Assets.svgs.icDkthue.svg(
+                        color: ColorUtils.iconTaxColor,
+                      ),
                       isSelect: controller.selectedIndex.value == 0,
                     ),
                     TaxWidgetItem(
                       onTap: () {
                         controller.tabController.animateTo(1);
                       },
-                      description: 'Đăng kí thuế',
-                      svgImage: Assets.svgs.registerTax.svg(
-                        color: ColorUtils.iconTaxColor,
-                      ),
+                      description: 'Kê khai thuế',
+                      svgImage: Assets.images.icKekhaithuecn.image(),
                       isSelect: controller.selectedIndex.value == 1,
                     ),
                     TaxWidgetItem(
@@ -52,8 +52,8 @@ class TaxScreen extends BaseView<TaxController> {
                         controller.tabController.animateTo(2);
                       },
                       description: 'Nộp thuế',
-                      svgImage: Assets.svgs.submiTax
-                          .svg(color: ColorUtils.iconTaxColor),
+                      svgImage: Assets.images.icNopthuecn
+                          .image(color: ColorUtils.iconTaxColor),
                       isSelect: controller.selectedIndex.value == 2,
                     ),
                   ],
@@ -63,10 +63,12 @@ class TaxScreen extends BaseView<TaxController> {
                 child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: controller.tabController,
-                    children: const [
-                      RegisterTax(),
-                      RegisterTax(),
-                      RegisterTax()
+                    children: [
+                      const RegistrationTaxScreen(),
+                      const TaxDeclarationScreen(),
+                      RegisterTax(
+                        controller: controller,
+                      )
                     ]),
               )
             ],
@@ -143,7 +145,7 @@ class TaxWidgetItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: EdgeInsets.all(SpaceUtils.spaceSmall),
+              padding: const EdgeInsets.all(24),
               width: 100.w,
               height: 100.w,
               decoration: const BoxDecoration(

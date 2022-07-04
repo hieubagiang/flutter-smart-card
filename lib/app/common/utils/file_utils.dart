@@ -21,16 +21,17 @@ class FileUtils {
     return result;
   }
 
-/*  static Future<bool> saveImage(String url) async {
-    final xFile = await getXFileFromUrl(url);
-    final response = await GallerySaver.saveImage(xFile.path);
-    return response!;
-  }*/
-
   static String base64EncodeFormat(Uint8List images) {
+    bool hasFormat = false;
     String format = 'data:images/jpeg;base64,';
     String data = base64Encode(images);
-    return format + data;
+    return hasFormat ? format : '' + data;
+  }
+
+  static Uint8List decodeBase64String(String src) {
+    String format = 'data:images/jpeg;base64,';
+    final data = base64Decode(src.replaceAll(format, ''));
+    return data;
   }
 
   static Map<String, dynamic> removeNull(Map<String, dynamic> map) {
@@ -64,6 +65,12 @@ class FileUtils {
     var largeBytes = await FileUtils.compressFile(sourceBytes, maxWidth);
     // var largeBytes2 = await FileUtils.compressFile2(sourceBytes, maxWidth);
     String base64Large = FileUtils.base64EncodeFormat(largeBytes);
+    return base64Large;
+  }
+
+  static Future<String> getBase64FromFile(File file) async {
+    var sourceBytes = await file.readAsBytes();
+    String base64Large = FileUtils.base64EncodeFormat(sourceBytes);
     return base64Large;
   }
 

@@ -7,6 +7,7 @@ import '../../../injector.dart';
 import '../constants/constants.dart';
 import '../helper/smart_card_helper.dart';
 import '../utils/utils.dart';
+import 'base_common_widgets.dart';
 import 'widget_state.dart';
 
 export 'package:get/get.dart';
@@ -35,7 +36,7 @@ export 'package:get/get.dart';
 /// Please extends to your [Controller].
 /// read the [Example] above.
 class BaseController extends SuperController
-    with WidgetState, ScreenState, FunctionUtils {
+    with WidgetState, ScreenState, FunctionUtils, BaseCommonWidgets {
   final box = GetStorage();
   bool withScrollController = false;
   late ScrollController scrollController;

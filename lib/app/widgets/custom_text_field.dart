@@ -49,6 +49,10 @@ class CustomTextField extends StatelessWidget {
               StyleUtils.style18Normal.copyWith(color: ColorUtils.blackColor),
           decoration: InputDecoration(
             isDense: true,
+            fillColor: Colors.grey[300],
+            filled: !isEnable, // dont forget this line
+
+            focusColor: Colors.black,
             contentPadding: padding ??
                 EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
             hintText: hintText,

@@ -17,6 +17,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/finger.jpg
   AssetGenImage get finger => const AssetGenImage('assets/images/finger.jpg');
 
+  /// File path: assets/images/ic_kekhaithuecn.png
+  AssetGenImage get icKekhaithuecn =>
+      const AssetGenImage('assets/images/ic_kekhaithuecn.png');
+
+  /// File path: assets/images/ic_logo_momo.png
+  AssetGenImage get icLogoMomo =>
+      const AssetGenImage('assets/images/ic_logo_momo.png');
+
+  /// File path: assets/images/ic_nopthuecn.png
+  AssetGenImage get icNopthuecn =>
+      const AssetGenImage('assets/images/ic_nopthuecn.png');
+
   /// File path: assets/images/padlock.png
   AssetGenImage get padlock => const AssetGenImage('assets/images/padlock.png');
 
@@ -33,23 +45,28 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_camera.svg
   SvgGenImage get icCamera => const SvgGenImage('assets/svgs/ic_camera.svg');
 
+  /// File path: assets/svgs/ic_dkthue.svg
+  SvgGenImage get icDkthue => const SvgGenImage('assets/svgs/ic_dkthue.svg');
+
   /// File path: assets/svgs/ic_finger_print.svg
-  SvgGenImage get icFingerPrint => const SvgGenImage('assets/svgs/ic_finger_print.svg');
+  SvgGenImage get icFingerPrint =>
+      const SvgGenImage('assets/svgs/ic_finger_print.svg');
 
   /// File path: assets/svgs/ic_fingerprint.svg
-  SvgGenImage get icFingerprint => const SvgGenImage('assets/svgs/ic_fingerprint.svg');
+  SvgGenImage get icFingerprint =>
+      const SvgGenImage('assets/svgs/ic_fingerprint.svg');
 
-  /// File path: assets/svgs/side_menu_logo.svg
-  SvgGenImage get sideMenuLogo => const SvgGenImage('assets/svgs/side_menu_logo.svg');
+  /// File path: assets/svgs/ic_kekhaithuecn.svg
+  SvgGenImage get icKekhaithuecn =>
+      const SvgGenImage('assets/svgs/ic_kekhaithuecn.svg');
 
-  /// File path: assets/svgs/side_menu_logo.svg
-  SvgGenImage get submiTax => const SvgGenImage('assets/svgs/ic_nopthuecn.svg');
+  /// File path: assets/svgs/ic_nopthuecn.svg
+  SvgGenImage get icNopthuecn =>
+      const SvgGenImage('assets/svgs/ic_nopthuecn.svg');
 
-  /// File path: assets/svgs/side_menu_logo.svg
-  SvgGenImage get registerTax => const SvgGenImage('assets/svgs/ic_dkthue.svg');
-
-  /// File path: assets/svgs/side_menu_logo.svg
-  SvgGenImage get elumerTax => const SvgGenImage('assets/svgs/ic_kekhaithuecn.svg');
+  /// File path: assets/svgs/ic_transaction.svg
+  SvgGenImage get icTransaction =>
+      const SvgGenImage('assets/svgs/ic_transaction.svg');
 }
 
 class Assets {

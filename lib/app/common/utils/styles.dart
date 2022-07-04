@@ -48,6 +48,15 @@ class StyleUtils {
       fontSize: 18.sp,
       fontWeight: FontWeight.w400,
       color: ColorUtils.primaryTextColor);
+  static final TextStyle style28Normal = TextStyle(
+      fontSize: 28.sp,
+      fontWeight: FontWeight.w400,
+      color: ColorUtils.primaryTextColor);
+  static final TextStyle style28Medium = TextStyle(
+      fontSize: 28.sp,
+      fontWeight: FontWeight.w500,
+      color: ColorUtils.primaryTextColor);
+
   static final TextStyle style18Medium = TextStyle(
       fontSize: 18.sp,
       fontWeight: FontWeight.w500,

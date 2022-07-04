@@ -1,36 +1,66 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:smart_card/app/common/utils/date_time.dart';
 
 import '../gender_enum.dart';
 
+part 'user_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class UserModel {
+  @JsonKey(name: 'identificationId')
   final String? cardId;
-  final String? pin;
+  @JsonKey(name: 'taxId')
+  final String? taxId;
+  @JsonKey(name: 'avatarImage')
   final String? avatarImage;
+  @JsonKey(name: 'fingerPrintImage')
   final String? fingerPrintImage;
+  @JsonKey(name: 'fullName')
   final String? fullName;
+  @JsonKey(name: 'address')
   final String? placeOfResidence;
+  @JsonKey(name: 'placeOfOrigin')
   final String? placeOfOrigin;
+  @JsonKey(name: 'sex', toJson: _genderToJson, fromJson: _genderFromJson)
   final GenderType? sex;
-  final String? nationality;
+  @JsonKey(name: 'national')
+  final String? national;
+  @JsonKey(name: 'birthday')
   final DateTime? birthday;
+  @JsonKey(name: 'expiredDate')
   final DateTime? expiredDate;
+  @JsonKey(name: 'releaseDate')
   final DateTime? releaseDate;
+  @JsonKey(name: 'personalIdentification')
   final String? personalIdentification;
-  final int? amount;
+  @JsonKey(
+      name: 'amount',
+      defaultValue: 0,
+      toJson: _amountToJson,
+      fromJson: _amountFromJson)
+  final int amount;
+  @JsonKey(
+      name: 'debt',
+      defaultValue: 0,
+      toJson: _amountToJson,
+      fromJson: _amountFromJson)
+  final int debt;
+  @JsonKey(name: 'autoPay', defaultValue: false)
+  final bool autoPay;
 
   factory UserModel.fromRaw(String raw) {
     int i = 0;
     final properties = raw.split('\$');
     return UserModel(
       cardId: properties[i++],
-      pin: properties[i++],
-      // avatarImage: properties[i++],
-      // fingerPrintImage: properties[i++],
+      taxId: properties[i++],
+      avatarImage: properties[i++],
+      fingerPrintImage: properties[i++],
       fullName: properties[i++],
       placeOfResidence: properties[i++],
       placeOfOrigin: properties[i++],
-      sex: properties[i++] == '1' ? GenderType.male : GenderType.female,
-      nationality: properties[i++],
+      sex: properties[i++] == '0' ? GenderType.male : GenderType.female,
+      national: properties[i++],
       birthday: DateTimeUtils.getDateTime(properties[i++],
           pattern: Pattern.ddMMyyyy_vi),
       expiredDate: DateTimeUtils.getDateTime(properties[i++],
@@ -39,6 +69,8 @@ class UserModel {
           pattern: Pattern.ddMMyyyy_vi),
       personalIdentification: properties[i++],
       amount: int.parse(properties[i++]),
+      debt: int.parse(properties[i++]),
+      autoPay: properties[i++] == 'true',
     );
   }
 
@@ -46,19 +78,21 @@ class UserModel {
 
   UserModel({
     this.cardId,
-    this.pin,
+    this.taxId,
     this.avatarImage,
     this.fingerPrintImage,
     this.fullName,
     this.placeOfResidence,
     this.placeOfOrigin,
     this.sex,
-    this.nationality,
+    this.national,
     this.birthday,
     this.expiredDate,
     this.releaseDate,
     this.personalIdentification,
-    this.amount,
+    this.autoPay = false,
+    this.amount = 0,
+    this.debt = 0,
   });
 
   @override
@@ -67,59 +101,44 @@ class UserModel {
       (other is UserModel &&
           runtimeType == other.runtimeType &&
           cardId == other.cardId &&
-          pin == other.pin &&
+          taxId == other.taxId &&
           avatarImage == other.avatarImage &&
           fingerPrintImage == other.fingerPrintImage &&
           fullName == other.fullName &&
           placeOfResidence == other.placeOfResidence &&
           placeOfOrigin == other.placeOfOrigin &&
           sex == other.sex &&
-          nationality == other.nationality &&
+          national == other.national &&
           birthday == other.birthday &&
           expiredDate == other.expiredDate &&
           releaseDate == other.releaseDate &&
           personalIdentification == other.personalIdentification &&
-          amount == other.amount);
+          amount == other.amount &&
+          autoPay == other.autoPay &&
+          debt == other.debt);
 
   @override
   int get hashCode =>
       cardId.hashCode ^
-      pin.hashCode ^
+      taxId.hashCode ^
       avatarImage.hashCode ^
       fingerPrintImage.hashCode ^
       fullName.hashCode ^
       placeOfResidence.hashCode ^
       placeOfOrigin.hashCode ^
       sex.hashCode ^
-      nationality.hashCode ^
+      national.hashCode ^
       birthday.hashCode ^
       expiredDate.hashCode ^
       releaseDate.hashCode ^
       personalIdentification.hashCode ^
+      debt.hashCode ^
+      autoPay.hashCode ^
       amount.hashCode;
-
-  @override
-  String toString() {
-    return 'UserModel{'
-        ' cardId: $cardId,'
-        ' pin: $pin,'
-        ' avatarImage: $avatarImage,'
-        ' fingerPrintImage: $fingerPrintImage,'
-        ' fullName: $fullName,'
-        ' address: $placeOfResidence,'
-        ' original: $placeOfOrigin,'
-        ' sex: $sex,'
-        ' national: $nationality,'
-        ' birthday: $birthday,'
-        ' expiredDate: $expiredDate,'
-        ' releaseDate: $releaseDate,'
-        ' personalIdentification: $personalIdentification,'
-        ' amount: $amount,'
-        '}';
-  }
 
   UserModel copyWith({
     String? cardId,
+    String? taxId,
     String? pin,
     String? avatarImage,
     String? fingerPrintImage,
@@ -133,69 +152,40 @@ class UserModel {
     DateTime? releaseDate,
     String? personalIdentification,
     int? amount,
+    int? debt,
     int? i,
+    bool? autoPay,
   }) {
     return UserModel(
       cardId: cardId ?? this.cardId,
-      pin: pin ?? this.pin,
+      autoPay: autoPay ?? this.autoPay,
+      taxId: taxId ?? this.taxId,
       avatarImage: avatarImage ?? this.avatarImage,
       fingerPrintImage: fingerPrintImage ?? this.fingerPrintImage,
       fullName: fullName ?? this.fullName,
       placeOfResidence: placeOfResidence ?? this.placeOfResidence,
       placeOfOrigin: placeOfOrigin ?? this.placeOfOrigin,
       sex: sex ?? this.sex,
-      nationality: nationality ?? this.nationality,
+      national: nationality ?? this.national,
       birthday: birthday ?? this.birthday,
       expiredDate: expiredDate ?? this.expiredDate,
       releaseDate: releaseDate ?? this.releaseDate,
       personalIdentification:
           personalIdentification ?? this.personalIdentification,
       amount: amount ?? this.amount,
+      debt: debt ?? this.debt,
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'cardId': cardId,
-      'pin': pin,
-      'avatarImage': avatarImage,
-      'fingerPrintImage': fingerPrintImage,
-      'fullName': fullName,
-      'address': placeOfResidence,
-      'original': placeOfOrigin,
-      'sex': sex,
-      'national': nationality,
-      'birthday': birthday,
-      'expiredDate': expiredDate,
-      'releaseDate': releaseDate,
-      'personalIdentification': personalIdentification,
-      'amount': amount,
-    };
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      cardId: map['cardId'] as String,
-      pin: map['pin'] as String,
-      avatarImage: map['avatarImage'] as String,
-      fingerPrintImage: map['fingerPrintImage'] as String,
-      fullName: map['fullName'] as String,
-      placeOfResidence: map['address'] as String,
-      placeOfOrigin: map['original'] as String,
-      sex: map['sex'] as GenderType,
-      nationality: map['national'] as String,
-      birthday: map['birthday'] as DateTime,
-      expiredDate: map['expiredDate'] as DateTime,
-      releaseDate: map['releaseDate'] as DateTime,
-      personalIdentification: map['personalIdentification'] as String,
-      amount: map['amount'] as int,
-    );
-  }
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   String simplify() =>
-      cardId! +
+      (cardId ?? '') +
       "\$" +
-      pin! +
+      (taxId ?? '') +
       "\$" +
       (avatarImage ?? '') +
       "\$" +
@@ -209,7 +199,7 @@ class UserModel {
       "\$" +
       '${sex?.id}' +
       "\$" +
-      nationality! +
+      national! +
       "\$" +
       '${DateTimeUtils.getStringDate(birthday, pattern: Pattern.ddMMyyyy_vi)}' +
       "\$" +
@@ -219,6 +209,23 @@ class UserModel {
       "\$" +
       personalIdentification! +
       "\$" +
-      '$amount';
+      '$amount' +
+      "\$" +
+      '$debt' +
+      "\$" +
+      '$autoPay';
+
 //</editor-fold>
+
+  static String _genderToJson(GenderType? type) => type?.id.toString() ?? '';
+
+  static GenderType _genderFromJson(int id) {
+    return id == GenderType.male.id ? GenderType.male : GenderType.female;
+  }
+
+  static String _amountToJson(int amount) => amount.toString();
+
+  static int _amountFromJson(String amount) {
+    return int.tryParse(amount) ?? 0;
+  }
 }

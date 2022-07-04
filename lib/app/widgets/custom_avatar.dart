@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,9 +21,11 @@ class CustomAvatar extends StatefulWidget {
   final double? borderRadius;
   final bool? showCameraIcon;
   final bool? isCircleAvatar;
+  final String? memoryImage;
 
   const CustomAvatar({
     Key? key,
+    this.memoryImage,
     this.fullName = '',
     this.avatarUrl,
     this.file,
@@ -95,6 +98,24 @@ class _CustomAvatarState extends State<CustomAvatar> {
   }
 
   Widget _buildAvatarWidget(num newSizeAvatar) {
+    if (widget.memoryImage != null) {
+      return Image(
+        fit: BoxFit.cover,
+        image: MemoryImage(base64Decode(widget.memoryImage!)),
+        frameBuilder: (BuildContext context, Widget child, int? frame,
+            bool wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded) {
+            return child;
+          }
+          return AnimatedOpacity(
+            child: child,
+            opacity: wasSynchronouslyLoaded ? 0 : 1,
+            duration: const Duration(seconds: 3),
+            curve: Curves.easeOut,
+          );
+        },
+      );
+    }
     if (widget.file != null) {
       return Image.file(
         widget.file!,
@@ -146,5 +167,9 @@ class _CustomAvatarState extends State<CustomAvatar> {
               ),
       ),
     );
+  }
+
+  void setStateIfMounted(f) {
+    if (mounted) setState(f);
   }
 }

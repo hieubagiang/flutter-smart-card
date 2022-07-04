@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:smart_card/app/common/utils/utils.dart';
+import 'package:smart_card/app/widgets/custom_button.dart';
 
-class ErrorDialog extends StatelessWidget {
-  const ErrorDialog({Key? key, this.errorMessage = ""}) : super(key: key);
+class CustomAlertDialog extends StatelessWidget {
+  const CustomAlertDialog(
+      {Key? key, this.content = "", this.title = 'Error', this.onTap})
+      : super(key: key);
 
-  final String errorMessage;
+  final String content;
+  final String title;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +25,27 @@ class ErrorDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Error',
-                style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.w500),
+              Text(
+                title,
+                style: StyleUtils.style24Medium
+                    .copyWith(color: Colors.red, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 6.h),
-              Text(errorMessage,
+              Text(content,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey[600])),
+                  style: StyleUtils.style20Normal
+                      .copyWith(color: Colors.grey[600])),
               SizedBox(height: 10.h),
-              InkWell(
-                onTap: () => SmartDialog.dismiss(),
-                child: const Text(
-                  'OK',
-                  style: TextStyle(color: Colors.blue),
+              SizedBox(
+                width: 200,
+                child: CustomButton(
+                  label: 'OK',
+                  bgColor: ColorUtils.primaryColor,
+                  onTap: () => onTap?.call() ?? SmartDialog.dismiss(),
+                  labelstyle:
+                      StyleUtils.style20Normal.copyWith(color: Colors.white),
                 ),
-              )
+              ),
             ],
           ),
         ),

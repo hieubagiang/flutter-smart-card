@@ -9,7 +9,7 @@ final Dio dio = Dio(BaseOptions(
   receiveTimeout: ApiConstant.responseTimeout,
   contentType: ApiConstant.contentType,
   headers: {'Accept': 'application/json'},
-  baseUrl: ApiConstant.host,
+  baseUrl: ApiConstant.baseUrl,
 ))
   ..interceptors.addAll([
     PrettyDioLogger(
